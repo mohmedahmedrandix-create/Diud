@@ -62,14 +62,8 @@
       background: #00d2ff;
     }
 
-    /* Neon Text Effect */
     .neon-text {
       text-shadow: 0 0 10px rgba(0, 210, 255, 0.7), 0 0 20px rgba(0, 166, 255, 0.5);
-    }
-    
-    .neon-border {
-      border-color: #00d2ff;
-      box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
     }
 
     .card-hover {
@@ -81,7 +75,6 @@
       border-color: #00d2ff;
     }
 
-    /* Pulse animation for floating whatsapp */
     @keyframes pulse-glow {
       0%, 100% {
         box-shadow: 0 0 15px rgba(0, 210, 255, 0.6), 0 0 30px rgba(37, 211, 102, 0.4);
@@ -102,7 +95,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
         
-        <!-- Brand Logo & Dev Name -->
+        <!-- Logo & Developer -->
         <div class="flex items-center gap-3 cursor-pointer" onclick="filterCategory('all')">
           <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-cyan-600 to-blue-500 p-0.5 shadow-neon">
             <div class="w-full h-full bg-[#090d16] rounded-[10px] flex items-center justify-center">
@@ -127,22 +120,17 @@
         <div class="hidden md:block flex-1 max-w-md mx-8">
           <div class="relative">
             <input type="text" id="searchInput" oninput="handleSearch()" placeholder="ابحث عن ألعاب، تطبيقات، مودز..." 
-              class="w-full bg-slate-900/80 border border-slate-700 text-sm rounded-full py-2.5 px-10 text-gray-200 placeholder-gray-400 focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all">
+              class="w-full bg-slate-900/80 border border-slate-700 text-sm rounded-full py-2.5 px-10 text-gray-200 placeholder-gray-400 focus:outline-none focus:border-brand-blue">
             <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3 text-gray-400"></i>
           </div>
         </div>
 
-        <!-- Actions -->
+        <!-- WhatsApp Header Button -->
         <div class="flex items-center gap-3">
-          <button onclick="openUploadModal()" class="hidden sm:flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold px-4 py-2 rounded-full text-sm shadow-neon transition-all hover:scale-105">
-            <i class="fa-solid fa-cloud-arrow-up"></i>
-            <span>إضافة APK</span>
-          </button>
-
           <a href="https://wa.me/201120918805?text=%D0%B7%D9%84%D8%A7%D9%85%D9%88%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%20%D9%8A%D8%A7%20%D8%A8%D8%B4%D9%85%D9%87%D9%86%D8%AF%D8%B3%20%D9%85%D8%AD%D9%85%D8%AF%20%D8%A3%D8%AD%D9%85%D8%AF%20%D8%B4%D9%88%D9%82%D9%8A" target="_blank" 
-            class="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/20 px-3 py-2 rounded-full text-xs font-bold transition-all">
+            class="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/20 px-3.5 py-2 rounded-full text-xs font-bold transition-all">
             <i class="fa-brands fa-whatsapp text-base"></i>
-            <span class="hidden lg:inline">تواصل واتساب</span>
+            <span>تواصل واتساب</span>
           </a>
         </div>
 
@@ -161,41 +149,23 @@
 
   <!-- ================= HERO BANNER ================= -->
   <header class="relative overflow-hidden py-12 bg-gradient-to-b from-[#0a1120] to-[#060911] border-b border-slate-800/80">
-    <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-blue/10 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
-
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
       <div class="inline-flex items-center gap-2 bg-brand-blue/10 border border-brand-blue/30 px-4 py-1.5 rounded-full text-brand-blue text-xs font-bold mb-4 animate-pulse">
         <i class="fa-solid fa-bolt"></i>
         <span>الموقع الرسمي والوحيد لـ FreeModX</span>
       </div>
       
-      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-4 leading-tight">
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-4">
         ألعابك وبرامجك المفضلـة <br>
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-sky-300 to-blue-500 neon-text">
           بأعلى جودة وروابط مباشرة 100%
         </span>
       </h1>
       
-      <p class="max-w-2xl mx-auto text-gray-400 text-sm sm:text-base mb-6 leading-relaxed">
-        منصة <strong class="text-brand-blue">FreeModX</strong> الخاصة برفع أحدث المودز، الألعاب، والتطبيقات المعدلة مجاناً بدعم وتطوير 
-        <span class="text-sky-300 font-bold">المبرمج محمد أحمد شوقي</span> (ابن القناطر الخيرية).
+      <p class="max-w-2xl mx-auto text-gray-400 text-sm sm:text-base mb-6">
+        منصة <strong class="text-brand-blue">FreeModX</strong> الخاصة برفع أحدث المودز مجاناً بدعم وتطوير 
+        <span class="text-sky-300 font-bold">المبرمج محمد أحمد شوقي</span> (القناطر الخيرية).
       </p>
-
-      <div class="flex flex-wrap justify-center gap-4 text-xs sm:text-sm text-gray-300">
-        <div class="flex items-center gap-2 bg-slate-900/80 border border-slate-800 px-3 py-1.5 rounded-lg">
-          <i class="fa-solid fa-shield-halved text-brand-blue"></i>
-          <span>روابط آمنة وفحص كامل</span>
-        </div>
-        <div class="flex items-center gap-2 bg-slate-900/80 border border-slate-800 px-3 py-1.5 rounded-lg">
-          <i class="fa-solid fa-gauge-high text-brand-blue"></i>
-          <span>سيرفرات تنزيل فائقة السرعة</span>
-        </div>
-        <div class="flex items-center gap-2 bg-slate-900/80 border border-slate-800 px-3 py-1.5 rounded-lg">
-          <i class="fa-solid fa-location-dot text-brand-blue"></i>
-          <span>صُنـع في القناطر الخيرية</span>
-        </div>
-      </div>
     </div>
   </header>
 
@@ -204,19 +174,11 @@
     
     <!-- CATEGORY FILTERS -->
     <div class="flex items-center justify-between flex-wrap gap-4 mb-8 border-b border-slate-800/80 pb-4">
-      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none w-full sm:w-auto">
-        <button onclick="filterCategory('all')" id="btn-all" class="cat-btn bg-brand-blue text-slate-950 font-bold px-5 py-2 rounded-xl text-sm transition-all shadow-glow">
-          الكل
-        </button>
-        <button onclick="filterCategory('games')" id="btn-games" class="cat-btn bg-slate-900 text-gray-300 hover:text-brand-blue hover:bg-slate-800 font-bold px-5 py-2 rounded-xl text-sm transition-all border border-slate-800">
-          <i class="fa-solid fa-gamepad ml-1"></i> الألعاب
-        </button>
-        <button onclick="filterCategory('apps')" id="btn-apps" class="cat-btn bg-slate-900 text-gray-300 hover:text-brand-blue hover:bg-slate-800 font-bold px-5 py-2 rounded-xl text-sm transition-all border border-slate-800">
-          <i class="fa-solid fa-mobile-screen-button ml-1"></i> التطبيقات
-        </button>
-        <button onclick="filterCategory('featured')" id="btn-featured" class="cat-btn bg-slate-900 text-gray-300 hover:text-brand-blue hover:bg-slate-800 font-bold px-5 py-2 rounded-xl text-sm transition-all border border-slate-800">
-          <i class="fa-solid fa-star ml-1 text-yellow-400"></i> الموصى بها
-        </button>
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+        <button onclick="filterCategory('all')" id="btn-all" class="cat-btn bg-brand-blue text-slate-950 font-bold px-5 py-2 rounded-xl text-sm transition-all shadow-glow">الكل</button>
+        <button onclick="filterCategory('games')" id="btn-games" class="cat-btn bg-slate-900 text-gray-300 font-bold px-5 py-2 rounded-xl text-sm transition-all border border-slate-800"><i class="fa-solid fa-gamepad ml-1"></i> الألعاب</button>
+        <button onclick="filterCategory('apps')" id="btn-apps" class="cat-btn bg-slate-900 text-gray-300 font-bold px-5 py-2 rounded-xl text-sm transition-all border border-slate-800"><i class="fa-solid fa-mobile-screen-button ml-1"></i> التطبيقات</button>
+        <button onclick="filterCategory('featured')" id="btn-featured" class="cat-btn bg-slate-900 text-gray-300 font-bold px-5 py-2 rounded-xl text-sm transition-all border border-slate-800"><i class="fa-solid fa-star ml-1 text-yellow-400"></i> الموصى بها</button>
       </div>
 
       <div class="text-xs text-gray-400">
@@ -226,264 +188,53 @@
 
     <!-- CARDS GRID -->
     <div id="appsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <!-- Generated Dynamically by JS -->
+      <!-- يتم توليد الألعاب والتطبيقات تلقائياً من ملف apps-data.js -->
     </div>
 
     <!-- Empty State -->
     <div id="noResults" class="hidden text-center py-16">
       <i class="fa-solid fa-magnifying-glass text-5xl text-slate-700 mb-4"></i>
-      <h3 class="text-lg font-bold text-gray-300">لم يتم العثور على أي نتائج!</h3>
-      <p class="text-sm text-gray-500 mt-1">جرب البحث بكلمات أخرى أو اختر تصنيف مختلف.</p>
+      <h3 class="text-lg font-bold text-gray-300">لم يتم العثور على نتائج!</h3>
     </div>
 
   </main>
 
   <!-- ================= FLOATING WHATSAPP BUTTON ================= -->
-  <a href="https://wa.me/201120918805?text=%D0%B7%D9%84%D8%A7%D9%85%D9%88%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%20%D9%8A%D8%A7%20%D8%A8%D8%B4%D9%85%D9%87%D9%86%D8%AF%D8%B3%20%D9%85%D8%AD%D9%85%D8%AF%20%D8%A3%D8%AD%D9%85%D8%AF%20%D8%B4%D9%88%D9%82%D9%8A%20%D8%B5%D8%A7%D8%AD%D8%A8%20%D9%85%D9%88%D9%82%D8%B9%20FreeModX" 
+  <a href="https://wa.me/201120918805?text=%D0%B7%D9%84%D8%A7%D9%85%D9%88%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%20%D9%8A%D8%A7%20%D8%A8%D8%B4%D9%85%D9%87%D9%86%D8%AF%D8%B3%20%D9%85%D8%AD%D9%85%D8%AF%20%D8%A3%D8%AD%D9%85%D8%AF%20%D8%B4%D9%88%D9%82%D9%8I" 
      target="_blank" 
-     class="whatsapp-btn fixed bottom-6 right-6 z-50 bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-neon transition-all hover:scale-110 group"
-     title="تواصل مع المبرمج عبر الواتساب">
+     class="whatsapp-btn fixed bottom-6 right-6 z-50 bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-neon transition-all hover:scale-110">
     <i class="fa-brands fa-whatsapp font-bold"></i>
-    <span class="absolute right-16 top-2 bg-slate-900 text-brand-blue text-xs font-bold px-3 py-1.5 rounded-lg border border-brand-blue/40 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
-      01120918805 | محمد أحمد شوقي
-    </span>
   </a>
 
   <!-- ================= FOOTER ================= -->
-  <footer class="bg-[#04060d] border-t border-slate-800/80 py-10 mt-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-        
-        <!-- About -->
-        <div>
-          <div class="flex items-center gap-2 mb-3">
-            <span class="text-xl font-black text-brand-blue neon-text">FreeModX</span>
-            <span class="text-xs bg-slate-800 text-gray-400 px-2 py-0.5 rounded">v2.5</span>
-          </div>
-          <p class="text-xs text-gray-400 leading-relaxed">
-            الموقع الخاص بنشر وتوزيع التطبيقات والألعاب المعدلة بأمان عالي وتحميل مباشر بدون إعلانات مزعجة.
-          </p>
-        </div>
-
-        <!-- Dev Info -->
-        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
-          <h4 class="text-sm font-bold text-brand-blue mb-2 flex items-center gap-2">
-            <i class="fa-solid fa-code"></i>
-            <span>تطوير وبرمجة</span>
-          </h4>
-          <p class="text-sm font-bold text-white">المبرمج: محمد أحمد شوقي</p>
-          <p class="text-xs text-sky-400 mt-0.5">العنوان: القناطر الخيرية - محافظة القليوبية</p>
-          <div class="mt-3 pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
-            <span class="text-gray-400">رقم الهاتف / الواتساب:</span>
-            <a href="https://wa.me/201120918805" target="_blank" class="text-brand-blue font-bold hover:underline dir-ltr">
-              01120918805
-            </a>
-          </div>
-        </div>
-
-        <!-- Quick Contact -->
-        <div>
-          <h4 class="text-sm font-bold text-gray-200 mb-3">تواصل سريع</h4>
-          <div class="flex flex-col gap-2">
-            <a href="https://wa.me/201120918805" target="_blank" class="flex items-center gap-2 text-xs text-gray-300 hover:text-emerald-400 transition-colors">
-              <i class="fa-brands fa-whatsapp text-emerald-400 text-sm"></i>
-              <span>واتساب: 01120918805</span>
-            </a>
-            <div class="flex items-center gap-2 text-xs text-gray-400">
-              <i class="fa-solid fa-location-dot text-brand-blue text-sm"></i>
-              <span>مصر - القناطر الخيرية</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="border-t border-slate-800/60 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
-        <p>© 2026 جميع الحقوق محفوظة لـ <strong class="text-brand-blue">FreeModX</strong> | برمجة محمد أحمد شوقي</p>
-        <p class="text-gray-600">تصميم الأزرق النيون - أداء فائق وسرعة صاروخية</p>
-      </div>
+  <footer class="bg-[#04060d] border-t border-slate-800/80 py-8">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-500">
+      <p>© 2026 جميع الحقوق محفوظة لـ <strong class="text-brand-blue">FreeModX</strong> | برمجة وتطوير المبرمج محمد أحمد شوقي (01120918805) - القناطر الخيرية</p>
     </div>
   </footer>
 
-  <!-- ================= APP DETAILS MODAL ================= -->
+  <!-- ================= MODAL ================= -->
   <div id="appModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-[#0e1626] border border-brand-blue/30 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative shadow-neon-lg animate-fade-in">
-      
-      <!-- Close Button -->
+    <div class="bg-[#0e1626] border border-brand-blue/30 rounded-2xl max-w-2xl w-full p-6 relative shadow-neon-lg">
       <button onclick="closeModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white bg-slate-800 w-8 h-8 rounded-full flex items-center justify-center">
         <i class="fa-solid fa-xmark"></i>
       </button>
-
-      <div id="modalContent">
-        <!-- Injected via JS -->
-      </div>
-
+      <div id="modalContent"></div>
     </div>
   </div>
 
-  <!-- ================= UPLOAD/ADD MODAL ================= -->
-  <div id="uploadModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-[#0e1626] border border-brand-blue/30 rounded-2xl max-w-lg w-full p-6 relative shadow-neon-lg">
-      
-      <button onclick="closeUploadModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white bg-slate-800 w-8 h-8 rounded-full flex items-center justify-center">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+  <!-- 🔗 استدعاء ملف البيانات الخارجي للألعاب والبرامج -->
+  <script src="apps-data.js"></script>
 
-      <div class="flex items-center gap-3 mb-6">
-        <div class="w-10 h-10 rounded-lg bg-brand-blue/20 flex items-center justify-center text-brand-blue">
-          <i class="fa-solid fa-cloud-arrow-up text-xl"></i>
-        </div>
-        <div>
-          <h3 class="text-lg font-bold text-white">إضافة لعبة / برنامج جديد</h3>
-          <p class="text-xs text-gray-400">سيتم إضافة المحتوى مباشرة لقاعدة بيانات FreeModX</p>
-        </div>
-      </div>
-
-      <form id="addAppForm" onsubmit="addNewApp(event)" class="space-y-4 text-xs">
-        <div>
-          <label class="block text-gray-300 font-bold mb-1">اسم اللعبة / التطبيق</label>
-          <input type="text" id="newAppName" required placeholder="مثال: PUBG Mobile Mod FreeModX" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-brand-blue focus:outline-none">
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-gray-300 font-bold mb-1">التصنيف</label>
-            <select id="newAppCategory" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-brand-blue focus:outline-none">
-              <option value="games">لعبة (Game)</option>
-              <option value="apps">تطبيق (App)</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-gray-300 font-bold mb-1">الحجم (MB)</label>
-            <input type="text" id="newAppSize" required placeholder="مثال: 95 MB" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-brand-blue focus:outline-none">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-gray-300 font-bold mb-1">الإصدار</label>
-            <input type="text" id="newAppVersion" required placeholder="v2.4.0" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-brand-blue focus:outline-none">
-          </div>
-          <div>
-            <label class="block text-gray-300 font-bold mb-1">الرابط المباشر للـ APK</label>
-            <input type="url" id="newAppUrl" required placeholder="https://download-link.com/app.apk" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-brand-blue focus:outline-none">
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-gray-300 font-bold mb-1">رابط صورة الأيقونة (اختياري)</label>
-          <input type="url" id="newAppIcon" placeholder="https://..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-brand-blue focus:outline-none">
-        </div>
-
-        <div>
-          <label class="block text-gray-300 font-bold mb-1">الوصف والمميزات</label>
-          <textarea id="newAppDesc" rows="3" required placeholder="اكتب وصف قصير ومميزات هذا المود..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-brand-blue focus:outline-none"></textarea>
-        </div>
-
-        <button type="submit" class="w-full bg-brand-blue text-slate-950 font-bold py-3 rounded-xl shadow-neon hover:bg-sky-400 transition-all text-sm mt-2">
-          نشر الآن في FreeModX
-        </button>
-      </form>
-
-    </div>
-  </div>
-
-
-  <!-- ================= JAVASCRIPT ================= -->
+  <!-- ⚙️ كود التشغيل والفلترة والبحث -->
   <script>
-    // Initial Apps Data
-    const initialApps = [
-      {
-        id: 1,
-        title: "GTA San Andreas FreeModX",
-        category: "games",
-        version: "v2.10.2",
-        size: "1.8 GB",
-        rating: "4.9",
-        downloads: "154,200",
-        featured: true,
-        icon: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=150&auto=format&fit=crop&q=80",
-        desc: "نسخة معُدلة بالكامل من المبرمج محمد أحمد شوقي تحتوي على قائمة غش كاملة (Cheat Menu)، جرافيك خيالي 4K وتحسينات أداء للهواتف.",
-        apkUrl: "#"
-      },
-      {
-        id: 2,
-        title: "Subway Surfers VIP Mod",
-        category: "games",
-        version: "v3.15.0",
-        size: "145 MB",
-        rating: "4.8",
-        downloads: "98,400",
-        featured: false,
-        icon: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=150&auto=format&fit=crop&q=80",
-        desc: "أموال ومفاتيح غير محدودة + تفعيل جميع الشخصيات المفتوحة مجاناً بدون تحميد بدون إعلانات.",
-        apkUrl: "#"
-      },
-      {
-        id: 3,
-        title: "FreeModX Speed Booster",
-        category: "apps",
-        version: "v1.0.4",
-        size: "12 MB",
-        rating: "5.0",
-        downloads: "42,100",
-        featured: true,
-        icon: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80",
-        desc: "أداة حصرية مطورة خصيصاً بواسطة محمد أحمد شوقي لتسريع الألعاب وتنظيف الذاكرة العشوائية RAM بنقرة واحدة.",
-        apkUrl: "#"
-      },
-      {
-        id: 4,
-        title: "CapCut Pro Ultra Mod",
-        category: "apps",
-        version: "v9.2.0",
-        size: "110 MB",
-        rating: "4.9",
-        downloads: "210,000",
-        featured: true,
-        icon: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=150&auto=format&fit=crop&q=80",
-        desc: "تنزيل تطبيق المونتاج الشهير كاب كات النسخة المدفوعة مجاناً، تفعيل كافة التأثيرات والفلترات بدون علامة مائية.",
-        apkUrl: "#"
-      },
-      {
-        id: 5,
-        title: "Minecraft PE Mod Menu",
-        category: "games",
-        version: "v1.20.50",
-        size: "650 MB",
-        rating: "4.9",
-        downloads: "310,500",
-        featured: true,
-        icon: "https://images.unsplash.com/photo-1627856013091-fed6e4e30025?w=150&auto=format&fit=crop&q=80",
-        desc: "ماينكرافت الأصلية للاندرويد مدمج معها مود المظهر والشخصيات المفتوحة مع أداء سلس جداً.",
-        apkUrl: "#"
-      },
-      {
-        id: 6,
-        title: "InShot Video Editor Pro",
-        category: "apps",
-        version: "v1.980",
-        size: "75 MB",
-        rating: "4.7",
-        downloads: "87,300",
-        featured: false,
-        icon: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=150&auto=format&fit=crop&q=80",
-        desc: "محرر الفيديوهات الاحترافي إن شوت مع إزالة العلامة المائية وتفتيح جميع الخطوط العربية والملصقات.",
-        apkUrl: "#"
-      }
-    ];
-
-    // Load from LocalStorage if available
-    let appsData = JSON.parse(localStorage.getItem('freemodx_apps')) || initialApps;
+    let appsData = (typeof initialApps !== 'undefined') ? initialApps : [];
     let currentCategory = 'all';
 
-    // Render Apps Grid
     function renderApps(appsToRender) {
       const grid = document.getElementById('appsGrid');
       const noResults = document.getElementById('noResults');
-      const appCount = document.getElementById('appCount');
-
-      appCount.innerText = appsToRender.length;
+      document.getElementById('appCount').innerText = appsToRender.length;
       grid.innerHTML = '';
 
       if (appsToRender.length === 0) {
@@ -495,33 +246,30 @@
 
       appsToRender.forEach(app => {
         const card = document.createElement('div');
-        card.className = "bg-brand-cardBg border border-brand-border rounded-2xl p-4 card-hover flex flex-col justify-between cursor-pointer relative overflow-hidden group";
+        card.className = "bg-brand-cardBg border border-brand-border rounded-2xl p-4 card-hover flex flex-col justify-between relative overflow-hidden group";
         
         card.innerHTML = `
           ${app.featured ? '<span class="absolute top-3 left-3 bg-brand-blue text-slate-950 font-black text-[10px] px-2 py-0.5 rounded-full shadow-glow">FreeModX VIP</span>' : ''}
-          
           <div>
             <div class="flex items-center gap-3.5 mb-3">
-              <img src="${app.icon}" alt="${app.title}" class="w-16 h-16 rounded-xl object-cover border border-slate-700 shadow-md group-hover:border-brand-blue transition-colors">
+              <img src="${app.icon}" class="w-16 h-16 rounded-xl object-cover border border-slate-700">
               <div class="overflow-hidden">
                 <h3 class="font-bold text-white text-base truncate group-hover:text-brand-blue transition-colors">${app.title}</h3>
                 <span class="text-xs text-sky-400 font-semibold bg-sky-950/60 px-2 py-0.5 rounded border border-sky-800/40 inline-block mt-1 dir-ltr">${app.version}</span>
               </div>
             </div>
-
-            <p class="text-xs text-gray-400 line-clamp-2 mb-4 leading-relaxed">${app.desc}</p>
+            <p class="text-xs text-gray-400 line-clamp-2 mb-4">${app.desc}</p>
           </div>
 
           <div>
             <div class="flex items-center justify-between text-xs text-gray-400 mb-3 border-t border-slate-800/80 pt-3">
-              <span class="flex items-center gap-1"><i class="fa-solid fa-hard-drive text-brand-blue"></i> ${app.size}</span>
-              <span class="flex items-center gap-1"><i class="fa-solid fa-download text-emerald-400"></i> ${app.downloads}</span>
-              <span class="flex items-center gap-1 text-yellow-400"><i class="fa-solid fa-star"></i> ${app.rating}</span>
+              <span><i class="fa-solid fa-hard-drive text-brand-blue"></i> ${app.size}</span>
+              <span><i class="fa-solid fa-download text-emerald-400"></i> ${app.downloads}</span>
+              <span class="text-yellow-400"><i class="fa-solid fa-star"></i> ${app.rating}</span>
             </div>
 
-            <button onclick="openAppModal(${app.id})" class="w-full bg-slate-900 border border-brand-blue/30 text-brand-blue font-bold py-2 rounded-xl text-xs hover:bg-brand-blue hover:text-slate-950 transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-circle-info"></i>
-              <span>التفاصيل والتحميل</span>
+            <button onclick="openAppModal(${app.id})" class="w-full bg-slate-900 border border-brand-blue/30 text-brand-blue font-bold py-2 rounded-xl text-xs hover:bg-brand-blue hover:text-slate-950 transition-all">
+              <i class="fa-solid fa-circle-info ml-1"></i> التفاصيل والتحميل
             </button>
           </div>
         `;
@@ -529,11 +277,8 @@
       });
     }
 
-    // Category Filter Handler
     function filterCategory(cat) {
       currentCategory = cat;
-      
-      // Update Buttons styling
       document.querySelectorAll('.cat-btn').forEach(btn => {
         btn.classList.remove('bg-brand-blue', 'text-slate-950', 'shadow-glow');
         btn.classList.add('bg-slate-900', 'text-gray-300');
@@ -545,169 +290,52 @@
         activeBtn.classList.add('bg-brand-blue', 'text-slate-950', 'shadow-glow');
       }
 
-      let filtered = [];
-      if (cat === 'all') {
-        filtered = appsData;
-      } else if (cat === 'featured') {
-        filtered = appsData.filter(a => a.featured);
-      } else {
-        filtered = appsData.filter(a => a.category === cat);
-      }
-
+      let filtered = (cat === 'all') ? appsData : (cat === 'featured' ? appsData.filter(a => a.featured) : appsData.filter(a => a.category === cat));
       renderApps(filtered);
     }
 
-    // Search Handler
     function handleSearch() {
       const q = document.getElementById('searchInput').value.toLowerCase();
-      const filtered = appsData.filter(a => 
-        a.title.toLowerCase().includes(q) || a.desc.toLowerCase().includes(q)
-      );
-      renderApps(filtered);
+      renderApps(appsData.filter(a => a.title.toLowerCase().includes(q) || a.desc.toLowerCase().includes(q)));
     }
 
     function handleSearchMobile() {
       const q = document.getElementById('searchInputMobile').value.toLowerCase();
-      const filtered = appsData.filter(a => 
-        a.title.toLowerCase().includes(q) || a.desc.toLowerCase().includes(q)
-      );
-      renderApps(filtered);
+      renderApps(appsData.filter(a => a.title.toLowerCase().includes(q) || a.desc.toLowerCase().includes(q)));
     }
 
-    // Modal Control
     function openAppModal(id) {
       const app = appsData.find(a => a.id === id);
       if(!app) return;
 
-      const modalContent = document.getElementById('modalContent');
-      modalContent.innerHTML = `
+      document.getElementById('modalContent').innerHTML = `
         <div class="flex items-start gap-4 mb-6">
-          <img src="${app.icon}" class="w-20 h-20 rounded-2xl object-cover border-2 border-brand-blue shadow-neon">
+          <img src="${app.icon}" class="w-20 h-20 rounded-2xl object-cover border-2 border-brand-blue">
           <div>
-            <div class="flex items-center gap-2">
-              <h2 class="text-xl font-bold text-white">${app.title}</h2>
-              <span class="bg-emerald-500/20 text-emerald-400 text-[10px] px-2 py-0.5 rounded border border-emerald-500/30">موثوق 100%</span>
-            </div>
-            <p class="text-xs text-brand-blue font-semibold mt-1">تعديل وفحص: المبرمج محمد أحمد شوقي</p>
+            <h2 class="text-xl font-bold text-white">${app.title}</h2>
+            <p class="text-xs text-brand-blue font-semibold mt-1">تعديل: المبرمج محمد أحمد شوقي (01120918805)</p>
             <div class="flex gap-3 text-xs text-gray-400 mt-2">
-              <span><i class="fa-solid fa-code-branch text-brand-blue"></i> ${app.version}</span>
-              <span>•</span>
-              <span><i class="fa-solid fa-hard-drive text-brand-blue"></i> ${app.size}</span>
+              <span>الإصدار: ${app.version}</span> • <span>الحجم: ${app.size}</span>
             </div>
           </div>
         </div>
 
         <div class="bg-slate-900/80 rounded-xl p-4 border border-slate-800 text-xs text-gray-300 mb-6 leading-relaxed">
-          <h4 class="font-bold text-white mb-2 text-sm flex items-center gap-2">
-            <i class="fa-solid fa-circle-check text-brand-blue"></i> مميزات هذا المود / التطبيق:
-          </h4>
           <p>${app.desc}</p>
         </div>
 
-        <!-- Download Timer Section -->
-        <div id="downloadSection" class="bg-slate-900/90 border border-brand-blue/30 rounded-xl p-5 text-center">
-          <p class="text-xs text-gray-400 mb-3">اضغط على الزر أدناه لبدء عملية التجهيز المباشر للملف</p>
-          
-          <button onclick="startDownloadTimer('${app.apkUrl}')" id="startBtn" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-extrabold py-3 rounded-xl shadow-neon text-sm transition-all flex items-center justify-center gap-2">
-            <i class="fa-solid fa-download"></i>
-            <span>تنزيل APK الآن (${app.size})</span>
-          </button>
-
-          <div id="timerContainer" class="hidden py-2">
-            <div class="text-brand-blue font-bold text-sm mb-2">جاري تجهيز رابط التحميل المباشر...</div>
-            <div class="text-3xl font-black text-white neon-text mb-3"><span id="countdown">5</span> ثواني</div>
-            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-              <div id="progressBar" class="bg-brand-blue h-full w-0 transition-all duration-1000"></div>
-            </div>
-          </div>
-
-          <a id="finalDownloadBtn" href="${app.apkUrl}" target="_blank" class="hidden w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-3 rounded-xl shadow-neon text-sm transition-all flex items-center justify-center gap-2 animate-bounce">
-            <i class="fa-solid fa-cloud-arrow-down text-lg"></i>
-            <span>اضغط هنا لبدء التحميل المباشر!</span>
-          </a>
-        </div>
-
-        <!-- Contact Dev Note -->
-        <div class="mt-4 text-center">
-          <a href="https://wa.me/201120918805?text=استفسار%20عن%20تطبيق:${encodeURIComponent(app.title)}" target="_blank" class="text-xs text-gray-400 hover:text-emerald-400 transition-colors inline-flex items-center gap-1">
-            <i class="fa-brands fa-whatsapp text-emerald-400"></i>
-            <span>تعذر التحميل؟ تواصل مع المبرمج محمد أحمد شوقي (01120918805)</span>
-          </a>
-        </div>
+        <a href="${app.apkUrl}" target="_blank" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-3 rounded-xl text-center block text-sm transition-all shadow-neon">
+          <i class="fa-solid fa-download ml-1"></i> تحميل APK مباشر
+        </a>
       `;
-
       document.getElementById('appModal').classList.remove('hidden');
-    }
-
-    function startDownloadTimer(url) {
-      document.getElementById('startBtn').classList.add('hidden');
-      document.getElementById('timerContainer').classList.remove('hidden');
-
-      let timeLeft = 5;
-      const countdownEl = document.getElementById('countdown');
-      const progressBar = document.getElementById('progressBar');
-
-      const interval = setInterval(() => {
-        timeLeft--;
-        countdownEl.innerText = timeLeft;
-        progressBar.style.width = `${((5 - timeLeft) / 5) * 100}%`;
-
-        if (timeLeft <= 0) {
-          clearInterval(interval);
-          document.getElementById('timerContainer').classList.add('hidden');
-          document.getElementById('finalDownloadBtn').classList.remove('hidden');
-        }
-      }, 1000);
     }
 
     function closeModal() {
       document.getElementById('appModal').classList.add('hidden');
     }
 
-    // Upload Modal Control
-    function openUploadModal() {
-      document.getElementById('uploadModal').classList.remove('hidden');
-    }
-    function closeUploadModal() {
-      document.getElementById('uploadModal').classList.add('hidden');
-    }
-
-    // Add New App Function
-    function addNewApp(e) {
-      e.preventDefault();
-      
-      const newApp = {
-        id: Date.now(),
-        title: document.getElementById('newAppName').value,
-        category: document.getElementById('newAppCategory').value,
-        size: document.getElementById('newAppSize').value,
-        version: document.getElementById('newAppVersion').value,
-        apkUrl: document.getElementById('newAppUrl').value,
-        icon: document.getElementById('newAppIcon').value || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80",
-        desc: document.getElementById('newAppDesc').value,
-        rating: "5.0",
-        downloads: "1",
-        featured: true
-      };
-
-      appsData.unshift(newApp);
-      localStorage.setItem('freemodx_apps', JSON.stringify(appsData));
-      
-      closeUploadModal();
-      filterCategory(currentCategory);
-      alert('تم إضافة التطبيق بنجاح إلى منصة FreeModX!');
-      document.getElementById('addAppForm').reset();
-    }
-
-    // Close Modals on outside click
-    window.onclick = function(event) {
-      const appModal = document.getElementById('appModal');
-      const uploadModal = document.getElementById('uploadModal');
-      if (event.target === appModal) closeModal();
-      if (event.target === uploadModal) closeUploadModal();
-    }
-
-    // Initial Render
+    // تشغيل القائمة عند فتح الصفحة
     filterCategory('all');
   </script>
 </body>
