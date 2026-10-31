@@ -31,6 +31,7 @@
             padding-bottom: 40px;
         }
 
+        /* Header */
         header {
             background-color: #0d1322;
             border-bottom: 1px solid var(--border-color);
@@ -48,16 +49,19 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 24px;
+            gap: 12px;
+            font-size: 26px;
             font-weight: bold;
             color: var(--text-main);
             text-decoration: none;
         }
 
-        .logo i {
-            color: var(--accent-green);
-            font-size: 28px;
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid var(--accent-green);
         }
 
         .logo span {
@@ -66,7 +70,7 @@
 
         .search-bar {
             flex: 1;
-            max-width: 500px;
+            max-width: 450px;
             display: flex;
             background: #172036;
             border-radius: 8px;
@@ -105,6 +109,7 @@
             align-items: center;
             font-size: 12px;
             gap: 4px;
+            transition: 0.2s;
         }
 
         nav a:hover, nav a.active {
@@ -117,6 +122,92 @@
             padding: 0 20px;
         }
 
+        /* Hero Banner Section (لوحة الصورة النينجا) */
+        .hero-banner {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: linear-gradient(90deg, rgba(13,19,34,0.95) 30%, rgba(13,19,34,0.4) 100%), 
+                        url('https://images.alphacoders.com/137/1377079.png') no-repeat center center/cover;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(37, 239, 117, 0.1);
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-banner h1 {
+            font-size: 38px;
+            color: var(--accent-green);
+            margin-bottom: 8px;
+            text-shadow: 0 0 15px rgba(37, 239, 117, 0.3);
+        }
+
+        .hero-banner p {
+            color: #e2e8f0;
+            max-width: 500px;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        .hero-tags {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-tag {
+            background: rgba(37, 239, 117, 0.15);
+            color: var(--accent-green);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            border: 1px solid rgba(37, 239, 117, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Category Filter Buttons */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .cat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .cat-card:hover {
+            background: var(--card-hover);
+            color: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        .cat-card i {
+            font-size: 20px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .cat-card span {
+            font-size: 12px;
+        }
+
+        /* Sections Grid */
         .section-header {
             display: flex;
             justify-content: space-between;
@@ -138,36 +229,37 @@
 
         .apps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
             gap: 15px;
         }
 
         .app-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 12px;
+            border-radius: 12px;
+            padding: 14px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             transition: 0.2s;
         }
 
         .app-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
             border-color: var(--accent-green);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
         .app-icon-row {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             align-items: center;
         }
 
         .app-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
             object-fit: cover;
             background: #252e48;
         }
@@ -202,8 +294,8 @@
             background: var(--accent-green);
             color: #000;
             text-align: center;
-            padding: 8px;
-            border-radius: 6px;
+            padding: 9px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
             font-size: 13px;
@@ -214,21 +306,57 @@
             border: none;
             cursor: pointer;
             width: 100%;
+            transition: 0.2s;
         }
 
         .download-btn:hover {
             background: var(--accent-hover);
+            box-shadow: 0 0 10px rgba(37, 239, 117, 0.4);
+        }
+
+        /* Footer Features */
+        .footer-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            margin-top: 50px;
+        }
+
+        .feature-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feature-box i {
+            font-size: 28px;
+            color: var(--accent-green);
+        }
+
+        .feature-box h4 {
+            font-size: 15px;
+        }
+
+        .feature-box p {
+            font-size: 12px;
+            color: var(--text-muted);
         }
     </style>
 </head>
 <body>
 
+    <!-- Header Navigation -->
     <header>
         <a href="#" class="logo">
-            <i class="fa-brands fa-android"></i> FreeMod<span>X</span>
+            <img src="https://ibb.co/1Jq8qrBB" class="logo-img" alt="FreeModX Logo" onerror="this.src='https://images.alphacoders.com/137/1377079.png'">
+            FreeMod<span>X</span>
         </a>
         <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="ابحث عن ألعاب وتطبيقات معدلة...">
+            <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="ابحث عن لعبة أو تطبيق...">
             <button><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
         <nav>
@@ -239,15 +367,41 @@
     </header>
 
     <div class="container">
-        <!-- قسم الألعاب -->
+
+        <!-- Hero Banner (لوحة الصورة النينجا والترحيب) -->
+        <div class="hero-banner">
+            <h1>FreeModX</h1>
+            <p>أكبر منصة لتحميل أحدث الألعاب والتطبيقات المعدلة مجاناً بروابط مباشرة وسريعة.</p>
+            <div class="hero-tags">
+                <div class="hero-tag"><i class="fa-solid fa-bolt"></i> روابط مباشرة 100%</div>
+                <div class="hero-tag"><i class="fa-solid fa-shield-halved"></i> آمنة ومفحوصة</div>
+                <div class="hero-tag"><i class="fa-solid fa-infinity"></i> مجانية للأبد</div>
+            </div>
+        </div>
+
+        <!-- Categories Section -->
+        <div class="categories-grid">
+            <div class="cat-card"><i class="fa-solid fa-gamepad"></i><span>أكشن</span></div>
+            <div class="cat-card"><i class="fa-solid fa-car"></i><span>سباق</span></div>
+            <div class="cat-card"><i class="fa-solid fa-dragon"></i><span>مغامرة</span></div>
+            <div class="cat-card"><i class="fa-solid fa-chess"></i><span>استراتيجية</span></div>
+            <div class="cat-card"><i class="fa-solid fa-basketball"></i><span>رياضة</span></div>
+            <div class="cat-card"><i class="fa-solid fa-puzzle-piece"></i><span>ألغاز</span></div>
+            <div class="cat-card"><i class="fa-solid fa-wrench"></i><span>أدوات</span></div>
+            <div class="cat-card"><i class="fa-solid fa-ellipsis"></i><span>المزيد</span></div>
+        </div>
+
+        <!-- الألعاب الشائعة -->
         <div class="section-header">
             <div class="section-title">
                 <i class="fa-solid fa-gamepad"></i>
                 <h3>الألعاب الشائعة</h3>
             </div>
         </div>
+
         <div class="apps-grid" id="gamesGrid">
-            <!-- لعبة Real Racing 3 المضافة مباشرة -->
+            
+            <!-- لعبة Real Racing 3 -->
             <div class="app-card">
                 <div class="app-icon-row">
                     <img src="https://img.utdstc.com/icon/f38/bf2/f38bf25d9b54cb5692ba5bc7d4da76f23223a3f9b08f9f4fea0f69adc271f0a4:600" class="app-icon" alt="Real Racing 3">
@@ -261,19 +415,65 @@
                     <i class="fa-solid fa-download"></i> تحميل
                 </a>
             </div>
+
         </div>
 
-        <!-- قسم التطبيقات -->
+        <!-- التطبيقات الشائعة -->
         <div class="section-header">
             <div class="section-title">
                 <i class="fa-solid fa-border-all"></i>
                 <h3>التطبيقات الشائعة</h3>
             </div>
         </div>
+
         <div class="apps-grid" id="appsGrid">
-            <!-- مكان التطبيقات -->
+            
+            <!-- مكان كروت التطبيقات المستقبلية -->
+
         </div>
+
+        <!-- مميزات Footer -->
+        <div class="footer-features">
+            <div class="feature-box">
+                <i class="fa-solid fa-shield-virus"></i>
+                <div>
+                    <h4>تحميل آمن</h4>
+                    <p>جميع الملفات مفحوصة</p>
+                </div>
+            </div>
+            <div class="feature-box">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <div>
+                    <h4>تحديثات مستمرة</h4>
+                    <p>أحدث الإصدارات أولاً بأول</p>
+                </div>
+            </div>
+            <div class="feature-box">
+                <i class="fa-solid fa-bolt"></i>
+                <div>
+                    <h4>سرعة عالية</h4>
+                    <p>روابط تحميل ميديافاير سريعة</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 
+    <!-- Script للبحث المباشر -->
+    <script>
+        function filterCards() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('app-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].querySelector('.app-details h4').innerText.toLowerCase();
+                if (title.includes(input)) {
+                    cards[i].style.display = "flex";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
 </html>
