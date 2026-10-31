@@ -31,7 +31,6 @@
             padding-bottom: 40px;
         }
 
-        /* Navbar */
         header {
             background-color: #0d1322;
             border-bottom: 1px solid var(--border-color);
@@ -91,11 +90,6 @@
             color: #000;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .search-bar button:hover {
-            background: var(--accent-hover);
         }
 
         nav {
@@ -111,11 +105,6 @@
             align-items: center;
             font-size: 12px;
             gap: 4px;
-            transition: 0.2s;
-        }
-
-        nav a i {
-            font-size: 18px;
         }
 
         nav a:hover, nav a.active {
@@ -128,146 +117,12 @@
             padding: 0 20px;
         }
 
-        /* Top Hero Banners */
-        .hero-section {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        @media (max-width: 900px) {
-            .hero-section {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .banner-main {
-            background: linear-gradient(to right, #0d1322, #182645);
-            border-radius: 12px;
-            padding: 30px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .banner-main h1 {
-            font-size: 42px;
-            color: var(--accent-green);
-            margin-bottom: 10px;
-        }
-
-        .banner-main p {
-            color: var(--text-muted);
-            max-width: 400px;
-            margin-bottom: 20px;
-        }
-
-        .banner-features {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .feature-tag {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .feature-tag i {
-            color: var(--accent-green);
-        }
-
-        .banner-side-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .side-banner {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .side-banner h3 {
-            font-size: 18px;
-            margin-bottom: 5px;
-        }
-
-        .side-banner p {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 15px;
-        }
-
-        .btn-green {
-            background: var(--accent-green);
-            color: #000;
-            padding: 8px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 13px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            border: none;
-            cursor: pointer;
-        }
-
-        /* Categories Bar */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        .cat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 12px 5px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.2s;
-            color: var(--text-muted);
-            text-decoration: none;
-        }
-
-        .cat-card:hover {
-            background: var(--card-hover);
-            color: var(--accent-green);
-            border-color: var(--accent-green);
-        }
-
-        .cat-card i {
-            font-size: 20px;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        .cat-card span {
-            font-size: 12px;
-        }
-
-        /* Main Section Header */
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
+            margin-top: 30px;
         }
 
         .section-title {
@@ -281,38 +136,12 @@
             color: var(--accent-green);
         }
 
-        .view-all {
-            color: var(--accent-green);
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        /* App Cards Grid */
         .apps-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
             gap: 15px;
-            margin-bottom: 40px;
         }
 
-        /* Empty State (شكل افتراضي لما يفضى الكاردات) */
-        .empty-placeholder {
-            grid-column: 1 / -1;
-            background: var(--card-bg);
-            border: 2px dashed var(--border-color);
-            border-radius: 12px;
-            padding: 40px;
-            text-align: center;
-            color: var(--text-muted);
-        }
-
-        .empty-placeholder i {
-            font-size: 40px;
-            margin-bottom: 10px;
-            color: var(--accent-green);
-        }
-
-        /* Single App Card Style (استخدم الشكل ده لما ترفع ألعابك) */
         .app-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -391,172 +220,111 @@
             background: var(--accent-hover);
         }
 
-        /* Footer Features */
-        .footer-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
-            border: 1px solid var(--border-color);
-            margin-top: 50px;
-        }
-
-        .feature-box {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .feature-box i {
-            font-size: 28px;
-            color: var(--accent-green);
-        }
-
-        .feature-box h4 {
-            font-size: 15px;
-        }
-
-        .feature-box p {
-            font-size: 12px;
+        .empty-msg {
             color: var(--text-muted);
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 20px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Navigation -->
     <header>
         <a href="#" class="logo">
             <i class="fa-brands fa-android"></i> FreeMod<span>X</span>
         </a>
-
         <div class="search-bar">
-            <input type="text" placeholder="ابحث عن ألعاب وتطبيقات معدلة...">
+            <input type="text" id="searchInput" placeholder="ابحث عن ألعاب وتطبيقات معدلة...">
             <button><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
-
         <nav>
             <a href="#" class="active"><i class="fa-solid fa-house"></i>الرئيسية</a>
             <a href="#"><i class="fa-solid fa-gamepad"></i>الألعاب</a>
             <a href="#"><i class="fa-solid fa-border-all"></i>التطبيقات</a>
-            <a href="#"><i class="fa-solid fa-layer-group"></i>الأقسام</a>
         </nav>
     </header>
 
     <div class="container">
-
-        <!-- Top Hero Section -->
-        <section class="hero-section">
-            <div class="banner-main">
-                <h1>FreeModX</h1>
-                <p>أفضل موقع لتحميل الألعاب والتطبيقات المعدلة مجاناً بروابط مباشرة وآمنة 100%.</p>
-                <div class="banner-features">
-                    <div class="feature-tag"><i class="fa-solid fa-bolt"></i> روابط سريعة</div>
-                    <div class="feature-tag"><i class="fa-solid fa-shield-halved"></i> آمن ومفحوص</div>
-                    <div class="feature-tag"><i class="fa-solid fa-infinity"></i> مجاني تماماً</div>
-                </div>
-            </div>
-
-            <div class="banner-side-container">
-                <div class="side-banner">
-                    <div>
-                        <h3>أفضل الألعاب</h3>
-                        <p>أموال غير محدودة وميزات مفتوحة</p>
-                        <a href="#" class="btn-green">استكشف الألعاب <i class="fa-solid fa-arrow-left"></i></a>
-                    </div>
-                </div>
-
-                <div class="side-banner">
-                    <div>
-                        <h3>التطبيقات المدفوعة</h3>
-                        <p>فتح جميع اشتراكات VIP مجاناً</p>
-                        <a href="#" class="btn-green">استكشف التطبيقات <i class="fa-solid fa-arrow-left"></i></a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Categories Section -->
-        <div class="categories-grid">
-            <a href="#" class="cat-card"><i class="fa-solid fa-gamepad"></i><span>أكشن</span></a>
-            <a href="#" class="cat-card"><i class="fa-solid fa-car"></i><span>سباق</span></a>
-            <a href="#" class="cat-card"><i class="fa-solid fa-dragon"></i><span>مغامرة</span></a>
-            <a href="#" class="cat-card"><i class="fa-solid fa-chess"></i><span>استراتيجية</span></a>
-            <a href="#" class="cat-card"><i class="fa-solid fa-basketball"></i><span>رياضة</span></a>
-            <a href="#" class="cat-card"><i class="fa-solid fa-puzzle-piece"></i><span>ألغاز</span></a>
-            <a href="#" class="cat-card"><i class="fa-solid fa-wrench"></i><span>أدوات</span></a>
-            <a href="#" class="cat-card"><i class="fa-solid fa-ellipsis"></i><span>المزيد</span></a>
-        </div>
-
-        <!-- Section 1: Popular Games -->
+        <!-- قسم الألعاب -->
         <div class="section-header">
             <div class="section-title">
                 <i class="fa-solid fa-gamepad"></i>
                 <h3>الألعاب الشائعة</h3>
             </div>
-            <a href="#" class="view-all">عرض الكل <i class="fa-solid fa-arrow-left"></i></a>
+        </div>
+        <div class="apps-grid" id="gamesGrid">
+            <!-- سيتم تعبئة الألعاب تلقائياً من ملف data.js -->
         </div>
 
-        <div class="apps-grid">
-            <!-- مكان إضافة الألعاب الخاصة بك -->
-            <div class="empty-placeholder">
-                <i class="fa-solid fa-folder-plus"></i>
-                <p>لا توجد ألعاب مضافة حالياً. يمكنك إضافة كروت الألعاب الخاصة بك هنا بسهولة!</p>
-            </div>
-        </div>
-
-        <!-- Section 2: Popular Apps -->
+        <!-- قسم التطبيقات -->
         <div class="section-header">
             <div class="section-title">
                 <i class="fa-solid fa-border-all"></i>
                 <h3>التطبيقات الشائعة</h3>
             </div>
-            <a href="#" class="view-all">عرض الكل <i class="fa-solid fa-arrow-left"></i></a>
         </div>
-
-        <div class="apps-grid">
-            <!-- مكان إضافة التطبيقات الخاصة بك -->
-            <div class="empty-placeholder">
-                <i class="fa-solid fa-box-open"></i>
-                <p>لا توجد تطبيقات مضافة حالياً. يمكنك إضافة كروت التطبيقات الخاصة بك هنا بسهولة!</p>
-            </div>
+        <div class="apps-grid" id="appsGrid">
+            <!-- سيتم تعبئة التطبيقات تلقائياً من ملف data.js -->
         </div>
-
-        <!-- Bottom Features -->
-        <div class="footer-features">
-            <div class="feature-box">
-                <i class="fa-solid fa-shield-virus"></i>
-                <div>
-                    <h4>تحميل آمن</h4>
-                    <p>جميع الملفات مفحوصة ومحمية</p>
-                </div>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-arrows-rotate"></i>
-                <div>
-                    <h4>تحديثات مستمرة</h4>
-                    <p>إضافة أحدث الإصدارات أولاً بأول</p>
-                </div>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-download"></i>
-                <div>
-                    <h4>مكتبة ضخمة</h4>
-                    <p>آلاف الألعاب والتطبيقات</p>
-                </div>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-bolt"></i>
-                <div>
-                    <h4>سرعة عالية</h4>
-                    <p>روابط تحميل مباشرة وسريعة</p>
-                </div>
-            </div>
-        </div>
-
     </div>
 
+    <!-- استدعاء ملف البيانات والسكริبت الخاص بالعرض -->
+    <script src="data.js"></script>
+    <script>
+        // دالة لعرض الألعاب في الموقع
+        function renderGames() {
+            const grid = document.getElementById('gamesGrid');
+            if (typeof gamesList === 'undefined' || gamesList.length === 0) {
+                grid.innerHTML = '<div class="empty-msg">لا توجد ألعاب مضافة حالياً.</div>';
+                return;
+            }
+            grid.innerHTML = gamesList.map(game => `
+                <div class="app-card">
+                    <div class="app-icon-row">
+                        <img src="${game.icon}" class="app-icon" alt="${game.name}">
+                        <div class="app-details">
+                            <h4>${game.name}</h4>
+                            <span>${game.version}</span>
+                            <span class="tag-badge">${game.tag}</span>
+                        </div>
+                    </div>
+                    <a href="${game.link}" class="download-btn" target="_blank">
+                        <i class="fa-solid fa-download"></i> تحميل
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        // دالة لعرض التطبيقات في الموقع
+        function renderApps() {
+            const grid = document.getElementById('appsGrid');
+            if (typeof appsList === 'undefined' || appsList.length === 0) {
+                grid.innerHTML = '<div class="empty-msg">لا توجد تطبيقات مضافة حالياً.</div>';
+                return;
+            }
+            grid.innerHTML = appsList.map(app => `
+                <div class="app-card">
+                    <div class="app-icon-row">
+                        <img src="${app.icon}" class="app-icon" alt="${app.name}">
+                        <div class="app-details">
+                            <h4>${app.name}</h4>
+                            <span>${app.version}</span>
+                            <span class="tag-badge">${app.tag}</span>
+                        </div>
+                    </div>
+                    <a href="${app.link}" class="download-btn" target="_blank">
+                        <i class="fa-solid fa-download"></i> تحميل
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        // تشغيل الدوال عند تحميل الصفحة
+        window.onload = function() {
+            renderGames();
+            renderApps();
+        };
+    </script>
 </body>
 </html>
