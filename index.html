@@ -219,13 +219,6 @@
         .download-btn:hover {
             background: var(--accent-hover);
         }
-
-        .empty-msg {
-            color: var(--text-muted);
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 20px;
-        }
     </style>
 </head>
 <body>
@@ -254,7 +247,20 @@
             </div>
         </div>
         <div class="apps-grid" id="gamesGrid">
-            <!-- سيتم تعبئة الألعاب تلقائياً من ملف data.js -->
+            <!-- لعبة Real Racing 3 المضافة مباشرة -->
+            <div class="app-card">
+                <div class="app-icon-row">
+                    <img src="https://img.utdstc.com/icon/f38/bf2/f38bf25d9b54cb5692ba5bc7d4da76f23223a3f9b08f9f4fea0f69adc271f0a4:600" class="app-icon" alt="Real Racing 3">
+                    <div class="app-details">
+                        <h4>Real Racing 3</h4>
+                        <span>v14.0.1</span>
+                        <span class="tag-badge">MOD مهكرة</span>
+                    </div>
+                </div>
+                <a href="https://www.mediafire.com/file/9koqkn2lg9hlirm/Real-Racing-3-v14.0.1-mod1.apk/file" class="download-btn" target="_blank">
+                    <i class="fa-solid fa-download"></i> تحميل
+                </a>
+            </div>
         </div>
 
         <!-- قسم التطبيقات -->
@@ -265,66 +271,9 @@
             </div>
         </div>
         <div class="apps-grid" id="appsGrid">
-            <!-- سيتم تعبئة التطبيقات تلقائياً من ملف data.js -->
+            <!-- مكان التطبيقات -->
         </div>
     </div>
 
-    <!-- استدعاء ملف البيانات والسكริبت الخاص بالعرض -->
-    <script src="data.js"></script>
-    <script>
-        // دالة لعرض الألعاب في الموقع
-        function renderGames() {
-            const grid = document.getElementById('gamesGrid');
-            if (typeof gamesList === 'undefined' || gamesList.length === 0) {
-                grid.innerHTML = '<div class="empty-msg">لا توجد ألعاب مضافة حالياً.</div>';
-                return;
-            }
-            grid.innerHTML = gamesList.map(game => `
-                <div class="app-card">
-                    <div class="app-icon-row">
-                        <img src="${game.icon}" class="app-icon" alt="${game.name}">
-                        <div class="app-details">
-                            <h4>${game.name}</h4>
-                            <span>${game.version}</span>
-                            <span class="tag-badge">${game.tag}</span>
-                        </div>
-                    </div>
-                    <a href="${game.link}" class="download-btn" target="_blank">
-                        <i class="fa-solid fa-download"></i> تحميل
-                    </a>
-                </div>
-            `).join('');
-        }
-
-        // دالة لعرض التطبيقات في الموقع
-        function renderApps() {
-            const grid = document.getElementById('appsGrid');
-            if (typeof appsList === 'undefined' || appsList.length === 0) {
-                grid.innerHTML = '<div class="empty-msg">لا توجد تطبيقات مضافة حالياً.</div>';
-                return;
-            }
-            grid.innerHTML = appsList.map(app => `
-                <div class="app-card">
-                    <div class="app-icon-row">
-                        <img src="${app.icon}" class="app-icon" alt="${app.name}">
-                        <div class="app-details">
-                            <h4>${app.name}</h4>
-                            <span>${app.version}</span>
-                            <span class="tag-badge">${app.tag}</span>
-                        </div>
-                    </div>
-                    <a href="${app.link}" class="download-btn" target="_blank">
-                        <i class="fa-solid fa-download"></i> تحميل
-                    </a>
-                </div>
-            `).join('');
-        }
-
-        // تشغيل الدوال عند تحميل الصفحة
-        window.onload = function() {
-            renderGames();
-            renderApps();
-        };
-    </script>
 </body>
 </html>
