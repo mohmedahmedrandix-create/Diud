@@ -101,8 +101,20 @@
                 <!-- Logo & School Name (Right Side) -->
                 <div class="flex items-center space-x-4 space-x-reverse">
                     <a href="#" class="flex-shrink-0 flex items-center gap-3 group">
-                        <!-- Direct Facebook Image Link for Amr Moussa School Logo -->
-                        <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=100064917031563" alt="شعار مدرسة عمرو موسى الثانوية بنين" class="h-14 w-14 object-cover rounded-full border-2 border-gold-500/60 p-0.5 group-hover:border-gold-400 transition duration-300 shadow-lg shadow-gold-500/20">
+                        <!-- Direct Facebook Image with SVG Fallback -->
+                        <div class="relative w-14 h-14 rounded-full border-2 border-gold-500/60 p-0.5 group-hover:border-gold-400 transition duration-300 shadow-lg shadow-gold-500/20 overflow-hidden bg-navy-900 flex items-center justify-center">
+                            <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=100064917031563" 
+                                 alt="شعار مدرسة عمرو موسى الثانوية بنين" 
+                                 class="w-full h-full object-cover rounded-full"
+                                 onerror="this.style.display='none'; document.getElementById('logoFallback').classList.remove('hidden');">
+                            
+                            <!-- Fallback Badge in case image fails to load -->
+                            <div id="logoFallback" class="hidden flex flex-col items-center justify-center text-gold-400 font-extrabold text-[10px] leading-none">
+                                <i class="fa-solid fa-shield-halved text-gold-400 text-base mb-0.5"></i>
+                                <span>عمرو</span>
+                            </div>
+                        </div>
+
                         <div>
                             <h1 class="text-lg md:text-xl font-extrabold text-slate-100 tracking-wide">مدرسة عمرو موسى الثانوية بنين</h1>
                             <p class="text-xs font-bold font-amiri text-gold-400 tracking-widest">مصنع الرجال</p>
@@ -160,7 +172,6 @@
 
     <!-- Hero Section -->
     <section id="hero" class="relative py-20 md:py-28 overflow-hidden bg-gradient-to-b from-navy-950 via-navy-900 to-navy-950 border-b border-gold-500/10">
-        <!-- Subtle Glow Background Effects -->
         <div class="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl pointer-events-none"></div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -195,14 +206,12 @@
     <section id="news" class="py-16 md:py-24 bg-navy-950 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <!-- Section Header -->
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 border-b border-gold-500/20 pb-6">
                 <div>
                     <h2 class="text-2xl md:text-4xl font-extrabold text-white mb-2">أحدث <span class="gold-gradient-text">أخبار المدرسة</span></h2>
                     <p class="text-slate-400 text-sm">التغطية الحصرية لمناشط، إعلانات، وفعاليات المدرسة أولاً بأول.</p>
                 </div>
 
-                <!-- News Filters -->
                 <div class="mt-6 md:mt-0 flex flex-wrap gap-2">
                     <button onclick="filterNews('all')" class="news-filter-btn active bg-gold-500 text-navy-950 font-bold px-4 py-1.5 rounded-lg text-xs md:text-sm transition">الكل</button>
                     <button onclick="filterNews('academic')" class="news-filter-btn bg-navy-800 text-slate-300 hover:text-gold-400 px-4 py-1.5 rounded-lg text-xs md:text-sm transition">تعليمي وامتحانات</button>
@@ -210,10 +219,9 @@
                 </div>
             </div>
 
-            <!-- News Grid -->
+            <!-- News Cards without user images -->
             <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- News Card 1 -->
                 <div class="news-card glass-card rounded-2xl overflow-hidden gold-border-glow transition duration-300 flex flex-col justify-between" data-category="academic">
                     <div>
                         <div class="h-40 bg-navy-900 border-b border-gold-500/20 flex items-center justify-center relative">
@@ -231,13 +239,12 @@
                         </div>
                     </div>
                     <div class="p-6 pt-0">
-                        <button onclick="openModal('جدول امتحانات شهر أكتوبر لجميع المراحل', 'اعتمدت إدارة المدرسة جدول امتحانات التقييم الأول لشهر أكتوبر، مع اتخاذ كافة الإجراءات التنظيمية داخل اللجان المدرسية لضمان سير الامتحانات بكل انضباط وهدوء. يُرجى من جميع الطلاب الالتزام بالحضور بالزي المدرسي الرسمي والمواظبة في المواعيد المحددة.')" class="w-full bg-navy-800 hover:bg-gold-500 hover:text-navy-950 text-gold-400 font-bold py-2.5 rounded-xl border border-gold-500/30 text-xs transition duration-300">
+                        <button onclick="openModal('جدول امتحانات شهر أكتوبر لجميع المراحل', 'اعتمدت إدارة المدرسة جدول امتحانات التقييم الأول لشهر أكتوبر، مع اتخاذ كافة الإجراءات التنظيمية داخل اللجان المدرسية لضمان سير الامتحانات بكل انضباط وهدوء.')" class="w-full bg-navy-800 hover:bg-gold-500 hover:text-navy-950 text-gold-400 font-bold py-2.5 rounded-xl border border-gold-500/30 text-xs transition duration-300">
                             اقرأ التفاصيل بالكامل
                         </button>
                     </div>
                 </div>
 
-                <!-- News Card 2 -->
                 <div class="news-card glass-card rounded-2xl overflow-hidden gold-border-glow transition duration-300 flex flex-col justify-between" data-category="sports">
                     <div>
                         <div class="h-40 bg-navy-900 border-b border-gold-500/20 flex items-center justify-center relative">
@@ -255,13 +262,12 @@
                         </div>
                     </div>
                     <div class="p-6 pt-0">
-                        <button onclick="openModal('فوز فريق دوري كرة القدم بالمركز الأول', 'أبطال مصنع الرجال يحصدون لقب بطولة المدارس الثانوية لكرة القدم بعد مباراة حماسية انتهت بالفوز المستحق. نتقدم بخالص التهنئة لأبطال فريق المدرسة وإدارة التربية الرياضية على هذا الإنجاز المشرّف الذي يضاف لسجل إنجازات المدرسة.')" class="w-full bg-navy-800 hover:bg-gold-500 hover:text-navy-950 text-gold-400 font-bold py-2.5 rounded-xl border border-gold-500/30 text-xs transition duration-300">
+                        <button onclick="openModal('فوز فريق دوري كرة القدم بالمركز الأول', 'أبطال مصنع الرجال يحصدون لقب بطولة المدارس الثانوية لكرة القدم بعد مباراة حماسية انتهت بالفوز المستحق. نتقدم بخالص التهنئة لأبطال فريق المدرسة.')" class="w-full bg-navy-800 hover:bg-gold-500 hover:text-navy-950 text-gold-400 font-bold py-2.5 rounded-xl border border-gold-500/30 text-xs transition duration-300">
                             اقرأ التفاصيل بالكامل
                         </button>
                     </div>
                 </div>
 
-                <!-- News Card 3 -->
                 <div class="news-card glass-card rounded-2xl overflow-hidden gold-border-glow transition duration-300 flex flex-col justify-between" data-category="academic">
                     <div>
                         <div class="h-40 bg-navy-900 border-b border-gold-500/20 flex items-center justify-center relative">
@@ -279,7 +285,7 @@
                         </div>
                     </div>
                     <div class="p-6 pt-0">
-                        <button onclick="openModal('افتتاح معرض العلوم والابتكارات التكنولوجية', 'افتتح السيد مدير المدرسة معرض المبتكرين الصغار بمشاركة واسعة من الطلاب في مجالات الروبوت والمشاريع البرمجية والهندسية، حيث تم عرض أفكار ممتازة تؤكد مهارات طلاب المدرسة الشغوفين بالتقنية والتكنولوجيا الحديثة.')" class="w-full bg-navy-800 hover:bg-gold-500 hover:text-navy-950 text-gold-400 font-bold py-2.5 rounded-xl border border-gold-500/30 text-xs transition duration-300">
+                        <button onclick="openModal('افتتاح معرض العلوم والابتكارات التكنولوجية', 'افتتح السيد مدير المدرسة معرض المبتكرين الصغار بمشاركة واسعة من الطلاب في مجالات الروبوت والمشاريع البرمجية والهندسية.')" class="w-full bg-navy-800 hover:bg-gold-500 hover:text-navy-950 text-gold-400 font-bold py-2.5 rounded-xl border border-gold-500/30 text-xs transition duration-300">
                             اقرأ التفاصيل بالكامل
                         </button>
                     </div>
@@ -289,19 +295,16 @@
         </div>
     </section>
 
-    <!-- Academic Departments Section (Replacing Teacher Images) -->
+    <!-- Academic Departments Section -->
     <section id="teachers" class="py-16 md:py-24 bg-navy-900 border-t border-b border-gold-500/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <h2 class="text-3xl md:text-5xl font-black text-white mb-4">الأقسام <span class="gold-gradient-text">التعليمية والتخصصات</span></h2>
                 <p class="text-slate-400 text-sm md:text-base">نخبة ممتازة من الأقسام الأكاديمية المجهزة بأعلى وأرقى وسائل التعليم العالي.</p>
             </div>
 
-            <!-- Departments Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 
-                <!-- Card 1 -->
                 <div class="glass-card p-6 rounded-2xl text-center gold-border-glow transition duration-300 group">
                     <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-navy-800 border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:scale-110 transition duration-300 shadow-lg">
                         <i class="fa-solid fa-square-root-variable text-3xl"></i>
@@ -311,7 +314,6 @@
                     <p class="text-slate-400 text-xs leading-relaxed">إعداد الطلاب للتفكير المنطقي والرياضي والمنافسة في مسابقات الأولمبياد.</p>
                 </div>
 
-                <!-- Card 2 -->
                 <div class="glass-card p-6 rounded-2xl text-center gold-border-glow transition duration-300 group">
                     <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-navy-800 border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:scale-110 transition duration-300 shadow-lg">
                         <i class="fa-solid fa-flask text-3xl"></i>
@@ -321,7 +323,6 @@
                     <p class="text-slate-400 text-xs leading-relaxed">معامل مجهزة بأحدث التقنيات لشرح التجارب العملية بشكل مباشر وفكك الرموز العلمية.</p>
                 </div>
 
-                <!-- Card 3 -->
                 <div class="glass-card p-6 rounded-2xl text-center gold-border-glow transition duration-300 group">
                     <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-navy-800 border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:scale-110 transition duration-300 shadow-lg">
                         <i class="fa-solid fa-book-quran text-3xl"></i>
@@ -331,7 +332,6 @@
                     <p class="text-slate-400 text-xs leading-relaxed">تعزيز الهوية العربية والتذوق الأدبي والمهارات اللغوية والكتابية السليمة.</p>
                 </div>
 
-                <!-- Card 4 -->
                 <div class="glass-card p-6 rounded-2xl text-center gold-border-glow transition duration-300 group">
                     <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-navy-800 border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:scale-110 transition duration-300 shadow-lg">
                         <i class="fa-solid fa-language text-3xl"></i>
@@ -349,14 +349,12 @@
     <footer id="contact" class="bg-navy-950 border-t border-gold-500/20 py-12 text-slate-400 text-xs">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-center md:text-right">
-                
                 <div>
                     <h4 class="text-white text-base font-bold mb-3">عمرو موسى الثانوية بنين</h4>
                     <p class="leading-relaxed text-slate-400">
                         صرح تعليمي يهدف للتميز العلمي وتربية أجيال قيادية تحت شعار «مصنع الرجال».
                     </p>
                 </div>
-
                 <div>
                     <h4 class="text-white text-base font-bold mb-3">روابط سريعة</h4>
                     <ul class="space-y-2">
@@ -365,15 +363,12 @@
                         <li><a href="#teachers" class="hover:text-gold-400 transition">الأقسام التعليمية</a></li>
                     </ul>
                 </div>
-
                 <div>
                     <h4 class="text-white text-base font-bold mb-3">التواصل والأنشطة</h4>
                     <p class="mb-2"><i class="fa-solid fa-location-dot text-gold-500 ml-2"></i> جمهورية مصر العربية</p>
                     <p><i class="fa-solid fa-phone text-gold-500 ml-2"></i> للتواصل مع إدارة المدرسة عبر المكاتب الرسمية</p>
                 </div>
-
             </div>
-
             <div class="border-t border-slate-800 pt-6 text-center text-slate-500">
                 جميع الحقوق محفوظة © 2026 - مدرسة عمرو موسى الثانوية بنين
             </div>
@@ -396,7 +391,6 @@
 
     <!-- JavaScript Functions -->
     <script>
-        // Ticker Bar Toggle
         function toggleTicker() {
             const ticker = document.getElementById('tickerBar');
             const btnText = document.getElementById('tickerBtnText');
@@ -409,13 +403,11 @@
             }
         }
 
-        // Mobile Menu Toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
             menu.classList.toggle('hidden');
         }
 
-        // News Modal Functions
         function openModal(title, body) {
             document.getElementById('modalTitle').textContent = title;
             document.getElementById('modalBody').textContent = body;
@@ -426,7 +418,6 @@
             document.getElementById('newsModal').classList.remove('modal-active');
         }
 
-        // News Category Filtering
         function filterNews(category) {
             const cards = document.querySelectorAll('.news-card');
             const btns = document.querySelectorAll('.news-filter-btn');
