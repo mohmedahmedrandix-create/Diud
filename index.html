@@ -81,7 +81,6 @@
             display: flex !important;
         }
 
-        /* Floating Upload Button Animation */
         .floating-btn-glow {
             box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
         }
@@ -436,7 +435,7 @@
         </div>
     </footer>
 
-    <!-- Floating Upload Button (الزر الجانبي العائم لرفع الصور والفيديوهات) -->
+    <!-- Floating Upload Button -->
     <div class="fixed bottom-6 left-6 z-50">
         <button onclick="openUploadModal()" class="bg-brand-red hover:bg-brand-darkred text-white p-4 rounded-full shadow-2xl floating-btn-glow flex items-center justify-center gap-2 font-extrabold transition duration-300 transform hover:scale-110">
             <i class="fa-solid fa-cloud-arrow-up text-2xl"></i>
@@ -444,7 +443,7 @@
         </button>
     </div>
 
-    <!-- Quick Upload Modal (نافذة الرفع السريعة) -->
+    <!-- Quick Upload Modal -->
     <div id="uploadModal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white max-w-lg w-full rounded-3xl p-6 md:p-8 relative shadow-2xl border border-slate-200">
             <button onclick="closeUploadModal()" class="absolute top-4 left-4 text-slate-400 hover:text-slate-700 text-lg">
@@ -457,13 +456,13 @@
                 </div>
                 <div>
                     <h3 class="text-lg font-extrabold text-brand-navy">مركز الرفع والنشر السريع</h3>
-                    <p class="text-slate-500 text-xs font-semibold">إضافة وصور وفيديوهات مباشرة للموقع بدون تعديل كود</p>
+                    <p class="text-slate-500 text-xs font-semibold">إضافة صور وفيديوهات وروابط مباشرة</p>
                 </div>
             </div>
 
             <form id="uploadForm" onsubmit="handleQuickUpload(event)" class="space-y-4 text-xs font-semibold">
                 <div>
-                    <label class="block text-slate-700 mb-1.5 font-bold">أين تريد إضافة المادة؟</label>
+                    <label class="block text-slate-700 mb-1.5 font-bold">مكان الإضافة</label>
                     <select id="uploadTarget" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 focus:outline-none focus:border-brand-blue text-slate-700">
                         <option value="news">إضافة كارت خبر / أنشطة جديد</option>
                         <option value="logo">تغيير شعار المدرسة (اللوجو)</option>
@@ -473,31 +472,18 @@
                 </div>
 
                 <div>
-                    <label class="block text-slate-700 mb-1.5 font-bold">عنوان الخبر / الوصف (في حال اختيار خبر جديد)</label>
+                    <label class="block text-slate-700 mb-1.5 font-bold">عنوان الخبر / الوصف</label>
                     <input type="text" id="mediaTitle" placeholder="مثال: افتتاح الدورة الرياضية..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 focus:outline-none focus:border-brand-blue text-slate-700">
                 </div>
 
                 <div>
-                    <label class="block text-slate-700 mb-1.5 font-bold">طريقة الرفع:</label>
-                    <div class="grid grid-cols-2 gap-2 mb-2">
-                        <button type="button" onclick="switchTab('file')" id="tabFileBtn" class="bg-brand-blue text-white py-2 rounded-lg font-bold">رفع ملف من الجهاز</button>
-                        <button type="button" onclick="switchTab('url')" id="tabUrlBtn" class="bg-slate-100 text-slate-600 py-2 rounded-lg font-bold">لصق رابط مباشر</button>
-                    </div>
-
-                    <!-- File Input Option -->
-                    <div id="fileInputContainer">
-                        <input type="file" id="mediaFileInput" accept="image/*,video/*" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-slate-600">
-                    </div>
-
-                    <!-- URL Input Option -->
-                    <div id="urlInputContainer" class="hidden">
-                        <input type="url" id="mediaUrlInput" placeholder="https://..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 focus:outline-none focus:border-brand-blue text-slate-700">
-                    </div>
+                    <label class="block text-slate-700 mb-1.5 font-bold">ضع الرابط المباشر (GitHub / Drive / Direct Link):</label>
+                    <input type="url" id="mediaUrlInput" placeholder="https://raw.githubusercontent.com/..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 focus:outline-none focus:border-brand-blue text-slate-700">
                 </div>
 
                 <div class="pt-2">
                     <button type="submit" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold py-3.5 rounded-xl shadow-lg transition duration-300 text-sm">
-                        <i class="fa-solid fa-paper-plane ml-2"></i> نشر فوري على الموقع
+                        <i class="fa-solid fa-paper-plane ml-2"></i> تحديث العرض
                     </button>
                 </div>
             </form>
@@ -520,8 +506,6 @@
 
     <!-- JavaScript Functions -->
     <script>
-        let currentUploadMode = 'file';
-
         function toggleTicker() {
             const ticker = document.getElementById('tickerBar');
             const btnText = document.getElementById('tickerBtnText');
@@ -557,21 +541,6 @@
             document.getElementById('uploadModal').classList.remove('modal-active');
         }
 
-        function switchTab(mode) {
-            currentUploadMode = mode;
-            if (mode === 'file') {
-                document.getElementById('fileInputContainer').classList.remove('hidden');
-                document.getElementById('urlInputContainer').classList.add('hidden');
-                document.getElementById('tabFileBtn').className = 'bg-brand-blue text-white py-2 rounded-lg font-bold';
-                document.getElementById('tabUrlBtn').className = 'bg-slate-100 text-slate-600 py-2 rounded-lg font-bold';
-            } else {
-                document.getElementById('fileInputContainer').classList.add('hidden');
-                document.getElementById('urlInputContainer').classList.remove('hidden');
-                document.getElementById('tabFileBtn').className = 'bg-slate-100 text-slate-600 py-2 rounded-lg font-bold';
-                document.getElementById('tabUrlBtn').className = 'bg-brand-blue text-white py-2 rounded-lg font-bold';
-            }
-        }
-
         function filterNews(category) {
             const cards = document.querySelectorAll('.news-card');
             const btns = document.querySelectorAll('.news-filter-btn');
@@ -593,32 +562,20 @@
             });
         }
 
-        /* المعالجة السريعة لرفع الصور والفيديوهات مباشرة وتحديث العناصر في الصفحة */
         function handleQuickUpload(e) {
             e.preventDefault();
             const target = document.getElementById('uploadTarget').value;
             const title = document.getElementById('mediaTitle').value || 'خبر جديد';
-            const fileInput = document.getElementById('mediaFileInput');
             const urlInput = document.getElementById('mediaUrlInput').value;
 
-            let mediaSrc = '';
-
-            if (currentUploadMode === 'file' && fileInput.files && fileInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    mediaSrc = e.target.result;
-                    applyMediaToPage(target, mediaSrc, title, fileInput.files[0].type.includes('video'));
-                }
-                reader.readAsDataURL(fileInput.files[0]);
-            } else if (currentUploadMode === 'url' && urlInput) {
-                mediaSrc = urlInput;
-                applyMediaToPage(target, mediaSrc, title, false);
+            if (urlInput) {
+                applyMediaToPage(target, urlInput, title);
             } else {
-                alert('الرجاء اختيار ملف أو وضع رابط صحيح أولاً!');
+                alert('الرجاء وضع رابط الصورة أو الفيديو المباشر أولاً!');
             }
         }
 
-        function applyMediaToPage(target, src, title, isVideo) {
+        function applyMediaToPage(target, src, title) {
             if (target === 'logo') {
                 document.getElementById('schoolLogoImg').src = src;
             } else if (target === 'principal') {
@@ -631,14 +588,10 @@
                 newCard.className = 'news-card bg-white rounded-2xl overflow-hidden card-glow transition duration-300 flex flex-col justify-between';
                 newCard.setAttribute('data-category', 'academic');
 
-                let mediaElement = isVideo 
-                    ? `<video src="${src}" controls class="w-full h-44 object-cover"></video>` 
-                    : `<img src="${src}" alt="${title}" class="w-full h-44 object-cover">`;
-
                 newCard.innerHTML = `
                     <div>
                         <div class="relative">
-                            ${mediaElement}
+                            <img src="${src}" alt="${title}" class="w-full h-44 object-cover">
                             <span class="absolute top-3 right-3 bg-brand-red text-white text-xs font-extrabold px-3 py-1 rounded-full shadow-sm">جديد</span>
                         </div>
                         <div class="p-6">
@@ -654,7 +607,7 @@
             }
 
             closeUploadModal();
-            alert('تم نشر الملف المرفوع بنجاح على الموقع! 🎉');
+            alert('تم نشر التحديث بنجاح! 🎉');
         }
     </script>
 </body>
