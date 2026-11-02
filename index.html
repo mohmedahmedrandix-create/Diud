@@ -17,12 +17,12 @@
                 extend: {
                     colors: {
                         brand: {
-                            blue: '#0284c7',       /* أزرق سماوي مشرق من اللوجو */
-                            darkblue: '#0369a1',   /* أزرق عميق للتدرجات */
-                            navy: '#0f172a',       /* كحلي للنصوص الداكنة */
-                            red: '#dc2626',        /* أحمر ياقوتي للخط والشعار */
-                            darkred: '#b91c1c',    /* أحمر غامق للتأثيرات */
-                            light: '#f8fafc',      /* أبيض ناصع خلفي */
+                            blue: '#0284c7',       /* أزرق سماوي مشرق */
+                            darkblue: '#0369a1',   /* أزرق عميق */
+                            navy: '#0f172a',       /* كحلي داكن */
+                            red: '#dc2626',        /* أحمر ياقوتي */
+                            darkred: '#b91c1c',    /* أحمر غامق */
+                            light: '#f8fafc',      /* أبيض ناصع */
                             card: '#ffffff'        /* كروت بيضاء */
                         }
                     },
@@ -41,12 +41,6 @@
             color: #0f172a;
             background-image: radial-gradient(rgba(2, 132, 199, 0.08) 1px, transparent 0);
             background-size: 28px 28px;
-        }
-
-        .red-gradient-text {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #991b1b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .blue-gradient-text {
@@ -83,9 +77,16 @@
             animation-play-state: paused;
         }
 
-        /* Modal styling */
         .modal-active {
             display: flex !important;
+        }
+
+        /* Floating Upload Button Animation */
+        .floating-btn-glow {
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
+        }
+        .floating-btn-glow:hover {
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.7);
         }
     </style>
 </head>
@@ -247,7 +248,7 @@
                 <!-- Principal Photo Container -->
                 <div class="flex flex-col items-center shrink-0">
                     <div class="w-36 h-36 md:w-44 md:h-44 rounded-3xl border-4 border-brand-blue/30 shadow-xl bg-white p-1.5 overflow-hidden relative group">
-                        <img src="https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/ed29e7d9e11dc73831d6fd097af0f34215d0ea8f/1000001501.jpg.png" 
+                        <img id="principalImg" src="https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/ed29e7d9e11dc73831d6fd097af0f34215d0ea8f/1000001501.jpg.png" 
                              alt="مدير المدرسة الأستاذ أحمد إبراهيم" 
                              class="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition duration-500">
                     </div>
@@ -272,7 +273,7 @@
         </div>
     </section>
 
-    <!-- Media Center Section (المركز الإعلامي والصحفي - الإعلامي محمد عبدالله اللاوندي) -->
+    <!-- Media Center Section -->
     <section id="media" class="py-16 bg-slate-50 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-sm flex flex-col md:flex-row-reverse items-center gap-8 md:gap-12">
@@ -280,7 +281,7 @@
                 <!-- Media Personality Photo -->
                 <div class="flex flex-col items-center shrink-0">
                     <div class="w-36 h-36 md:w-44 md:h-44 rounded-3xl border-4 border-brand-red/30 shadow-xl bg-white p-1.5 overflow-hidden relative group">
-                        <img src="https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/refs/heads/main/1000001504.jpg.png" 
+                        <img id="mediaOfficerImg" src="https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/refs/heads/main/1000001504.jpg.png" 
                              alt="الإعلامي محمد عبدالله اللاوندي" 
                              class="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition duration-500">
                     </div>
@@ -305,13 +306,13 @@
         </div>
     </section>
 
-    <!-- News Section -->
+    <!-- News & Videos Section -->
     <section id="news" class="py-16 md:py-24 bg-slate-50 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 border-b border-slate-200 pb-6">
                 <div>
-                    <h2 class="text-2xl md:text-4xl font-extrabold text-brand-navy mb-2">أحدث <span class="blue-gradient-text">أخبار المدرسة</span></h2>
+                    <h2 class="text-2xl md:text-4xl font-extrabold text-brand-navy mb-2">أحدث <span class="blue-gradient-text">الأخبار والفيديوهات</span></h2>
                     <p class="text-slate-500 text-sm font-semibold">متابعة يومية لكافة الإعلانات، جداول الامتحانات، والأنشطة الطلابية.</p>
                 </div>
 
@@ -341,7 +342,7 @@
                         </div>
                     </div>
                     <div class="p-6 pt-0">
-                        <button onclick="openModal('جدول امتحانات شهر أكتوبر لجميع المراحل', 'اعتمدت إدارة المدرسة جدول امتحانات التقييم الأول لشهر أكتوبر، مع اتخاذ كافة الإجراءات التنظيمية داخل اللجان المدرسية لضمان سير الامتحانات بكل انضباط وهدوء. يُرجى من جميع الطلاب الالتزام بالحضور بالزي المدرسي الرسمي.')" class="w-full bg-slate-100 hover:bg-brand-blue hover:text-white text-brand-blue font-bold py-2.5 rounded-xl text-xs transition duration-300">
+                        <button onclick="openModal('جدول امتحانات شهر أكتوبر لجميع المراحل', 'اعتمدت إدارة المدرسة جدول امتحانات التقييم الأول لشهر أكتوبر، مع اتخاذ كافة الإجراءات التنظيمية داخل اللجان المدرسية لضمان سير الامتحانات بكل انضباط وهدوء.')" class="w-full bg-slate-100 hover:bg-brand-blue hover:text-white text-brand-blue font-bold py-2.5 rounded-xl text-xs transition duration-300">
                             اقرأ التفاصيل بالكامل
                         </button>
                     </div>
@@ -397,104 +398,6 @@
         </div>
     </section>
 
-    <!-- Academic Departments Section -->
-    <section id="departments" class="py-16 md:py-24 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-5xl font-black text-brand-navy mb-4">الأقسام <span class="blue-gradient-text">التعليمية والمعامل</span></h2>
-                <p class="text-slate-500 text-sm md:text-base font-semibold">بنية تحتية متطورة وكوادر تعليمية مؤهلة على أعلى مستوى.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                
-                <div class="bg-white p-6 rounded-2xl text-center card-glow transition duration-300 group">
-                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-sky-100 border border-brand-blue/30 flex items-center justify-center text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition duration-300 shadow-sm">
-                        <i class="fa-solid fa-square-root-variable text-3xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-brand-navy mb-2">قسم الرياضيات</h3>
-                    <p class="text-brand-red text-xs font-extrabold mb-3">الجبر والهندسة والتفاضل</p>
-                    <p class="text-slate-500 text-xs leading-relaxed font-semibold">تنمية مهارات حل المشكلات والتفكير المنطقي والهندسي للطلاب.</p>
-                </div>
-
-                <div class="bg-white p-6 rounded-2xl text-center card-glow transition duration-300 group">
-                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-sky-100 border border-brand-blue/30 flex items-center justify-center text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition duration-300 shadow-sm">
-                        <i class="fa-solid fa-flask text-3xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-brand-navy mb-2">معامل العلوم والتجارب</h3>
-                    <p class="text-brand-red text-xs font-extrabold mb-3">الفيزياء والكيمياء والأحياء</p>
-                    <p class="text-slate-500 text-xs leading-relaxed font-semibold">معامل حديثة مجهزة بأحدث الوسائل لشرح المناهج بشكل عملي مباشر.</p>
-                </div>
-
-                <div class="bg-white p-6 rounded-2xl text-center card-glow transition duration-300 group">
-                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-sky-100 border border-brand-blue/30 flex items-center justify-center text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition duration-300 shadow-sm">
-                        <i class="fa-solid fa-book-quran text-3xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-brand-navy mb-2">قسم اللغة العربية</h3>
-                    <p class="text-brand-red text-xs font-extrabold mb-3">النحو والأنشطة الأدبية</p>
-                    <p class="text-slate-500 text-xs leading-relaxed font-semibold">تعزيز ثقافة التذوق الأدبي والفصاحة والمهارات اللغوية والكتابية.</p>
-                </div>
-
-                <div class="bg-white p-6 rounded-2xl text-center card-glow transition duration-300 group">
-                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-sky-100 border border-brand-blue/30 flex items-center justify-center text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition duration-300 shadow-sm">
-                        <i class="fa-solid fa-laptop-code text-3xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-brand-navy mb-2">معامل الحاسب الآلي</h3>
-                    <p class="text-brand-red text-xs font-extrabold mb-3">البرمجة والتكنولوجيا</p>
-                    <p class="text-slate-500 text-xs leading-relaxed font-semibold">تدريب الطلاب على المهارات البرمجية وتطبيقات الحاسب الحديثة.</p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Support & Schedule Section -->
-    <section class="py-16 bg-white border-t border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200">
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fa-solid fa-clock text-2xl text-brand-blue"></i>
-                        <h3 class="text-xl font-bold text-brand-navy">مواعيد اليوم الدراسي</h3>
-                    </div>
-                    <ul class="space-y-3 text-xs md:text-sm font-semibold text-slate-600">
-                        <li class="flex justify-between border-b border-slate-200 pb-2">
-                            <span>طابور الصباح والتمارين:</span>
-                            <span class="text-brand-blue font-bold">07:30 صباحاً</span>
-                        </li>
-                        <li class="flex justify-between border-b border-slate-200 pb-2">
-                            <span>بداية الحصة الأولى:</span>
-                            <span class="text-brand-blue font-bold">08:00 صباحاً</span>
-                        </li>
-                        <li class="flex justify-between border-b border-slate-200 pb-2">
-                            <span>الفسحة المدرسية:</span>
-                            <span class="text-brand-blue font-bold">11:00 صباحاً</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>الانصراف الرسمي:</span>
-                            <span class="text-brand-blue font-bold">02:00 ظهراً</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200">
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fa-solid fa-hand-holding-hand text-2xl text-brand-red"></i>
-                        <h3 class="text-xl font-bold text-brand-navy">مجموعات الدعم المدرسي</h3>
-                    </div>
-                    <p class="text-slate-600 text-xs md:text-sm leading-relaxed font-semibold mb-4">
-                        تُوفر المدرسة حصص تقوية ودعم تعليمي مجاني ومباشر للطلاب تحت إشراف نخبة من كبار المعلمين لمساعدتهم على التفوق والتميز.
-                    </p>
-                    <a href="#contact" class="inline-block bg-brand-blue text-white text-xs font-bold px-5 py-2.5 rounded-xl hover:bg-brand-darkblue transition">
-                        استفسر عن المواعيد
-                    </a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer id="contact" class="bg-brand-navy text-slate-300 py-12 text-xs">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -533,6 +436,74 @@
         </div>
     </footer>
 
+    <!-- Floating Upload Button (الزر الجانبي العائم لرفع الصور والفيديوهات) -->
+    <div class="fixed bottom-6 left-6 z-50">
+        <button onclick="openUploadModal()" class="bg-brand-red hover:bg-brand-darkred text-white p-4 rounded-full shadow-2xl floating-btn-glow flex items-center justify-center gap-2 font-extrabold transition duration-300 transform hover:scale-110">
+            <i class="fa-solid fa-cloud-arrow-up text-2xl"></i>
+            <span class="hidden md:inline text-xs">رفع صورة / فيديو</span>
+        </button>
+    </div>
+
+    <!-- Quick Upload Modal (نافذة الرفع السريعة) -->
+    <div id="uploadModal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white max-w-lg w-full rounded-3xl p-6 md:p-8 relative shadow-2xl border border-slate-200">
+            <button onclick="closeUploadModal()" class="absolute top-4 left-4 text-slate-400 hover:text-slate-700 text-lg">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
+                <div class="w-12 h-12 rounded-2xl bg-red-100 text-brand-red flex items-center justify-center text-xl shrink-0">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-extrabold text-brand-navy">مركز الرفع والنشر السريع</h3>
+                    <p class="text-slate-500 text-xs font-semibold">إضافة وصور وفيديوهات مباشرة للموقع بدون تعديل كود</p>
+                </div>
+            </div>
+
+            <form id="uploadForm" onsubmit="handleQuickUpload(event)" class="space-y-4 text-xs font-semibold">
+                <div>
+                    <label class="block text-slate-700 mb-1.5 font-bold">أين تريد إضافة المادة؟</label>
+                    <select id="uploadTarget" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 focus:outline-none focus:border-brand-blue text-slate-700">
+                        <option value="news">إضافة كارت خبر / أنشطة جديد</option>
+                        <option value="logo">تغيير شعار المدرسة (اللوجو)</option>
+                        <option value="principal">تغيير صورة مدير المدرسة</option>
+                        <option value="media">تغيير صورة المسؤول الإعلامي</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-slate-700 mb-1.5 font-bold">عنوان الخبر / الوصف (في حال اختيار خبر جديد)</label>
+                    <input type="text" id="mediaTitle" placeholder="مثال: افتتاح الدورة الرياضية..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 focus:outline-none focus:border-brand-blue text-slate-700">
+                </div>
+
+                <div>
+                    <label class="block text-slate-700 mb-1.5 font-bold">طريقة الرفع:</label>
+                    <div class="grid grid-cols-2 gap-2 mb-2">
+                        <button type="button" onclick="switchTab('file')" id="tabFileBtn" class="bg-brand-blue text-white py-2 rounded-lg font-bold">رفع ملف من الجهاز</button>
+                        <button type="button" onclick="switchTab('url')" id="tabUrlBtn" class="bg-slate-100 text-slate-600 py-2 rounded-lg font-bold">لصق رابط مباشر</button>
+                    </div>
+
+                    <!-- File Input Option -->
+                    <div id="fileInputContainer">
+                        <input type="file" id="mediaFileInput" accept="image/*,video/*" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-slate-600">
+                    </div>
+
+                    <!-- URL Input Option -->
+                    <div id="urlInputContainer" class="hidden">
+                        <input type="url" id="mediaUrlInput" placeholder="https://..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 focus:outline-none focus:border-brand-blue text-slate-700">
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-brand-red hover:bg-brand-darkred text-white font-extrabold py-3.5 rounded-xl shadow-lg transition duration-300 text-sm">
+                        <i class="fa-solid fa-paper-plane ml-2"></i> نشر فوري على الموقع
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- News Details Modal -->
     <div id="newsModal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white max-w-lg w-full rounded-2xl p-6 relative shadow-2xl border border-slate-200">
@@ -549,6 +520,8 @@
 
     <!-- JavaScript Functions -->
     <script>
+        let currentUploadMode = 'file';
+
         function toggleTicker() {
             const ticker = document.getElementById('tickerBar');
             const btnText = document.getElementById('tickerBtnText');
@@ -576,6 +549,29 @@
             document.getElementById('newsModal').classList.remove('modal-active');
         }
 
+        function openUploadModal() {
+            document.getElementById('uploadModal').classList.add('modal-active');
+        }
+
+        function closeUploadModal() {
+            document.getElementById('uploadModal').classList.remove('modal-active');
+        }
+
+        function switchTab(mode) {
+            currentUploadMode = mode;
+            if (mode === 'file') {
+                document.getElementById('fileInputContainer').classList.remove('hidden');
+                document.getElementById('urlInputContainer').classList.add('hidden');
+                document.getElementById('tabFileBtn').className = 'bg-brand-blue text-white py-2 rounded-lg font-bold';
+                document.getElementById('tabUrlBtn').className = 'bg-slate-100 text-slate-600 py-2 rounded-lg font-bold';
+            } else {
+                document.getElementById('fileInputContainer').classList.add('hidden');
+                document.getElementById('urlInputContainer').classList.remove('hidden');
+                document.getElementById('tabFileBtn').className = 'bg-slate-100 text-slate-600 py-2 rounded-lg font-bold';
+                document.getElementById('tabUrlBtn').className = 'bg-brand-blue text-white py-2 rounded-lg font-bold';
+            }
+        }
+
         function filterNews(category) {
             const cards = document.querySelectorAll('.news-card');
             const btns = document.querySelectorAll('.news-filter-btn');
@@ -595,6 +591,70 @@
                     card.style.display = 'none';
                 }
             });
+        }
+
+        /* المعالجة السريعة لرفع الصور والفيديوهات مباشرة وتحديث العناصر في الصفحة */
+        function handleQuickUpload(e) {
+            e.preventDefault();
+            const target = document.getElementById('uploadTarget').value;
+            const title = document.getElementById('mediaTitle').value || 'خبر جديد';
+            const fileInput = document.getElementById('mediaFileInput');
+            const urlInput = document.getElementById('mediaUrlInput').value;
+
+            let mediaSrc = '';
+
+            if (currentUploadMode === 'file' && fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    mediaSrc = e.target.result;
+                    applyMediaToPage(target, mediaSrc, title, fileInput.files[0].type.includes('video'));
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            } else if (currentUploadMode === 'url' && urlInput) {
+                mediaSrc = urlInput;
+                applyMediaToPage(target, mediaSrc, title, false);
+            } else {
+                alert('الرجاء اختيار ملف أو وضع رابط صحيح أولاً!');
+            }
+        }
+
+        function applyMediaToPage(target, src, title, isVideo) {
+            if (target === 'logo') {
+                document.getElementById('schoolLogoImg').src = src;
+            } else if (target === 'principal') {
+                document.getElementById('principalImg').src = src;
+            } else if (target === 'media') {
+                document.getElementById('mediaOfficerImg').src = src;
+            } else if (target === 'news') {
+                const grid = document.getElementById('newsGrid');
+                const newCard = document.createElement('div');
+                newCard.className = 'news-card bg-white rounded-2xl overflow-hidden card-glow transition duration-300 flex flex-col justify-between';
+                newCard.setAttribute('data-category', 'academic');
+
+                let mediaElement = isVideo 
+                    ? `<video src="${src}" controls class="w-full h-44 object-cover"></video>` 
+                    : `<img src="${src}" alt="${title}" class="w-full h-44 object-cover">`;
+
+                newCard.innerHTML = `
+                    <div>
+                        <div class="relative">
+                            ${mediaElement}
+                            <span class="absolute top-3 right-3 bg-brand-red text-white text-xs font-extrabold px-3 py-1 rounded-full shadow-sm">جديد</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-slate-400 text-xs font-semibold mb-2 flex items-center gap-2">
+                                <i class="fa-regular fa-calendar text-brand-blue"></i> الآن
+                            </div>
+                            <h3 class="text-lg font-bold text-brand-navy mb-3 hover:text-brand-blue transition">${title}</h3>
+                            <p class="text-slate-600 text-xs leading-relaxed">تم التحديث وتغطية المادة الإعلامية فوراً عبر المركز الإعلامي لـ مدرسة عمرو موسى الثانوية بنين.</p>
+                        </div>
+                    </div>
+                `;
+                grid.prepend(newCard);
+            }
+
+            closeUploadModal();
+            alert('تم نشر الملف المرفوع بنجاح على الموقع! 🎉');
         }
     </script>
 </body>
