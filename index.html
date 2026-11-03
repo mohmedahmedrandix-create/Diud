@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدرسة عمرو موسى الثانوية بنين | مصنع الرجال</title>
-    <!-- Tailwind CSS for layout and styling -->
+    <title>مدرسة عمرو موسى الثانوية بنين | البوابة الملوكية الشاملة</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome for icons -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Cairo & Amiri for regal Arabic typography -->
+    <!-- Google Fonts: Cairo & Amiri -->
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,700;1,400&family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     
     <script>
@@ -16,19 +16,32 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            blue: '#0284c7',       /* أزرق سماوي مشرق */
-                            darkblue: '#0369a1',   /* أزرق عميق */
-                            navy: '#0f172a',       /* كحلي داكن */
-                            red: '#dc2626',        /* أحمر ياقوتي */
-                            darkred: '#b91c1c',    /* أحمر غامق */
-                            light: '#f8fafc',      /* أبيض ناصع */
-                            card: '#ffffff'        /* كروت بيضاء */
+                        royal: {
+                            blue: '#000080',
+                            navy: '#000040',
+                            lightbg: '#ffffff',
+                            card: '#f8fafc',
+                            gold: '#FFD700',
+                            darkgold: '#B8860B'
                         }
                     },
                     fontFamily: {
                         cairo: ['Cairo', 'sans-serif'],
                         amiri: ['Amiri', 'serif']
+                    },
+                    animation: {
+                        'marquee': 'marquee 25s linear infinite',
+                        'float': 'float 4s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(100%)' },
+                            '100%': { transform: 'translateX(-100%)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
                     }
                 }
             }
@@ -37,47 +50,389 @@
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #f1f5f9;
+            background-color: #ffffff;
             color: #0f172a;
-            background-image: radial-gradient(rgba(2, 132, 199, 0.08) 1px, transparent 0);
-            background-size: 28px 28px;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(0, 0, 128, 0.03) 0%, transparent 70%),
+                radial-gradient(rgba(0, 0, 128, 0.05) 1px, transparent 1px);
+            background-size: 100% 100%, 30px 30px;
         }
 
-        .blue-gradient-text {
-            background: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #1e3a8a 100%);
+        .royal-gradient-text {
+            background: linear-gradient(135deg, #000080 0%, #0000cd 40%, #B8860B 80%, #FFD700 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .card-glow {
-            box-shadow: 0 4px 20px -2px rgba(2, 132, 199, 0.1);
-            border: 1px solid rgba(226, 232, 240, 0.8);
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
         }
 
-        .card-glow:hover {
-            box-shadow: 0 10px 30px -5px rgba(2, 132, 199, 0.2);
-            border-color: rgba(2, 132, 199, 0.4);
+        .royal-gradient-bg {
+            background: linear-gradient(135deg, #000080 0%, #000040 100%);
         }
 
-        /* Ticker Animation */
-        @keyframes ticker {
-            0% { transform: translate3d(100%, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); }
+        .royal-card-glow {
+            background: #ffffff;
+            border: 2px solid rgba(0, 0, 128, 0.12);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 128, 0.06), 0 0 0 1px rgba(255, 215, 0, 0.25);
+            transition: all 0.3s ease;
         }
-        .ticker-wrap {
+
+        .royal-card-glow:hover {
+            transform: translateY(-4px);
+            border-color: #000080;
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 128, 0.15);
+        }
+
+        .tab-btn {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            border: 2px solid #cbd5e1;
+            transition: all 0.3s ease;
+        }
+        .tab-btn.active-tab {
+            background: linear-gradient(135deg, #000080 0%, #000040 100%);
+            color: #ffffff;
+            border-color: #FFD700;
+            box-shadow: 0 4px 15px rgba(0, 0, 128, 0.25);
+        }
+
+        canvas#particles {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        .ticker-move {
-            display: inline-block;
-            animation: ticker 25s linear infinite;
-        }
-        .ticker-move:hover {
-            animation-play-state: paused;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
         }
 
-        .modal-active {
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #ffffff; }
+        ::-webkit-scrollbar-thumb { background: #000080; border-radius: 4px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-royal-blue selection:text-white relative">
+
+    <canvas id="particles"></canvas>
+
+    <!-- الميزة 8: شريط تقدم القراءة -->
+    <div id="progressBar" class="fixed top-0 left-0 h-1.5 gold-gradient-bg z-50 transition-all duration-150 w-0"></div>
+
+    <div class="relative z-10 flex flex-col justify-between min-h-screen">
+        
+        <!-- الميزة 6 & 38: شريط التنبيهات مع الساعة -->
+        <div class="royal-gradient-bg text-white text-xs py-2.5 px-4 border-b-2 border-royal-gold relative z-40 shadow-md">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+                <div class="flex items-center gap-3 w-full md:w-auto overflow-hidden">
+                    <span class="gold-gradient-bg text-black px-3.5 py-1 rounded-full font-black text-[10px] flex items-center gap-1.5 shrink-0 shadow-md animate-pulse">
+                        <i class="fa-solid fa-video"></i> التغطية المباشرة
+                    </span>
+                    <div class="overflow-hidden whitespace-nowrap w-full">
+                        <p class="inline-block animate-marquee text-amber-200 font-bold">
+                            👑 مرحباً بكم في البوابة الشاملة لمدرسة عمرو موسى الثانوية بنين | تابع أحدث الأخبار والفيديوهات الحصرية!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 shrink-0 font-bold text-[11px]">
+                    <span id="egyptClock" class="hidden lg:inline text-amber-300"><i class="fa-solid fa-clock ml-1"></i> جارٍ التحميل...</span>
+                    <!-- الميزة 2 & 41: زر الواتساب والنسخ -->
+                    <a href="https://wa.me/201120918805" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded-full border border-emerald-400 transition flex items-center gap-1">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> المطور: 01120918805
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- الترويسة الرئيسية -->
+        <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-xl border-b-2 border-royal-blue/20 shadow-md">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    <div class="flex items-center space-x-4 space-x-reverse">
+                        <a href="#" class="flex-shrink-0 flex items-center gap-3.5 group">
+                            <div class="relative w-14 h-14 rounded-2xl border-4 border-royal-blue p-0.5 group-hover:border-royal-gold transition duration-500 shadow-xl bg-white overflow-hidden flex items-center justify-center">
+                                <img id="schoolLogoImg"
+                                     src="https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/7028119258fde7eaacfaf7fe6962c64817bd70dd/1000001499.jpg.png" 
+                                     alt="شعار مدرسة عمرو موسى الثانوية بنين" 
+                                     class="w-full h-full object-cover rounded-xl">
+                            </div>
+                            <div>
+                                <h1 class="text-lg md:text-xl font-black text-royal-blue tracking-wide">مدرسة عمرو موسى الثانوية بنين</h1>
+                                <p class="text-xs font-bold font-amiri royal-gradient-text tracking-widest flex items-center gap-1.5">
+                                    <span>« مصنع الرجال »</span>
+                                    <i class="fa-solid fa-crown text-royal-darkgold"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- الميزة 3: أزرار التنقل والتبويب الرئيسية -->
+        <section class="relative py-10 text-center bg-gradient-to-b from-sky-50/60 via-white to-slate-50 border-b border-royal-blue/10">
+            <div class="max-w-7xl mx-auto px-4 relative z-10">
+                <h1 class="text-3xl md:text-5xl font-black tracking-tight leading-tight mb-2">
+                    مدرسة <span class="royal-gradient-text">عمرو موسى</span> الثانوية بنين
+                </h1>
+                <p class="text-2xl md:text-3xl font-amiri font-extrabold royal-gradient-text tracking-wider mb-6">
+                    « مصنع الرجال والأبطال »
+                </p>
+
+                <!-- أزرار اختيار القسم (Tab Buttons) -->
+                <div class="flex flex-wrap justify-center items-center gap-2.5 max-w-5xl mx-auto my-2 p-2 bg-slate-100 rounded-3xl border border-slate-200">
+                    <button onclick="switchTab('news-tab')" id="btn-news-tab" class="tab-btn active-tab px-4 py-2.5 rounded-2xl text-xs font-black flex items-center gap-2">
+                        <i class="fa-solid fa-photo-film text-amber-400"></i> الأخبار والفيديوهات
+                    </button>
+                    <button onclick="switchTab('schedule-tab')" id="btn-schedule-tab" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-black flex items-center gap-2">
+                        <i class="fa-solid fa-clock"></i> الجدول الرسمي (2026/2027)
+                    </button>
+                    <button onclick="switchTab('leadership-tab')" id="btn-leadership-tab" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-black flex items-center gap-2">
+                        <i class="fa-solid fa-user-tie"></i> قيادة المدرسة والمركز الإعلامي
+                    </button>
+                    <button onclick="switchTab('services-tab')" id="btn-services-tab" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-black flex items-center gap-2">
+                        <i class="fa-solid fa-laptop-code"></i> البوابة الرقمية
+                    </button>
+                    <button onclick="switchTab('faq-tab')" id="btn-faq-tab" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-black flex items-center gap-2">
+                        <i class="fa-solid fa-circle-question"></i> الإرشادات والأسئلة
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. قسم الأخبار والفيديوهات والصور (القسم الرئيسي المفعل والمفتوح تلقائياً) -->
+        <section id="news-tab" class="tab-content py-12 bg-white scroll-mt-28">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-10">
+                    <span class="text-xs font-black text-royal-darkgold bg-amber-50 border border-royal-gold px-4 py-1.5 rounded-full inline-block mb-2">
+                        <i class="fa-solid fa-clapperboard"></i> المعرض الإعلامي المباشر
+                    </span>
+                    <h2 class="text-3xl font-black text-royal-blue">أحدث التغطيات والفيديوهات والصور</h2>
+                    <p class="text-slate-500 text-xs font-semibold mt-1">يتم نشر وتوثيق الفيديوهات والأخبار الحصرية فوراً</p>
+                </div>
+
+                <!-- المكان الذي تظهر فيه الفيديوهات والأخبار المضافة ديناميكياً بواسطة news.js -->
+                <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- سيتم إضافة الفيديوهات والصور هنا تلقائياً -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. قسم الجدول الأسبوعي (الميزة 4 & 32) -->
+        <section id="schedule-tab" class="tab-content hidden py-12 bg-white">
+            <div class="max-w-4xl mx-auto px-4">
+                <div class="text-center mb-6">
+                    <h2 class="text-3xl font-black text-royal-blue">مواعيد الحصص الأسبوعية الرسمية (2026 / 2027 م)</h2>
+                    <button onclick="window.print()" class="mt-3 bg-royal-blue text-white text-xs px-4 py-2 rounded-xl font-bold shadow-md hover:bg-royal-navy"><i class="fa-solid fa-print ml-1"></i> طباعة الجدول</button>
+                </div>
+                <div class="overflow-hidden rounded-3xl border-2 border-royal-blue/30 shadow-xl bg-white">
+                    <table class="w-full text-right text-xs md:text-sm font-bold">
+                        <thead class="royal-gradient-bg text-white font-black text-center">
+                            <tr>
+                                <th class="p-3.5 border-b border-royal-gold">البرنامج / الحصة</th>
+                                <th class="p-3.5 border-b border-royal-gold">من</th>
+                                <th class="p-3.5 border-b border-royal-gold">إلى</th>
+                                <th class="p-3.5 border-b border-royal-gold">الزمن</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-center">
+                            <tr class="bg-blue-50/50"><td class="p-3.5 font-black text-royal-blue">طابور الصباح</td><td class="p-3.5">7:45</td><td class="p-3.5">8:00</td><td class="p-3.5">15 ق</td></tr>
+                            <tr><td class="p-3.5 font-black">الحصة الأولى</td><td class="p-3.5">8:00</td><td class="p-3.5">8:50</td><td class="p-3.5">50 ق</td></tr>
+                            <tr class="bg-slate-50"><td class="p-3.5 font-black">الحصة الثانية</td><td class="p-3.5">8:50</td><td class="p-3.5">9:40</td><td class="p-3.5">50 ق</td></tr>
+                            <tr><td class="p-3.5 font-black">الحصة الثالثة</td><td class="p-3.5">9:40</td><td class="p-3.5">10:30</td><td class="p-3.5">50 ق</td></tr>
+                            <tr class="bg-slate-50"><td class="p-3.5 font-black">الحصة الرابعة</td><td class="p-3.5">10:30</td><td class="p-3.5">11:20</td><td class="p-3.5">50 ق</td></tr>
+                            <tr class="bg-amber-100/70 font-black text-royal-darkgold"><td class="p-3.5">الفسحــــــة</td><td class="p-3.5">11:20</td><td class="p-3.5">11:40</td><td class="p-3.5">20 ق</td></tr>
+                            <tr><td class="p-3.5 font-black">الحصة الخامسة</td><td class="p-3.5">11:40</td><td class="p-3.5">12:30</td><td class="p-3.5">50 ق</td></tr>
+                            <tr class="bg-slate-50"><td class="p-3.5 font-black">الحصة السادسة</td><td class="p-3.5">12:30</td><td class="p-3.5">1:20</td><td class="p-3.5">50 ق</td></tr>
+                            <tr><td class="p-3.5 font-black">الحصة السابعة</td><td class="p-3.5">1:20</td><td class="p-3.5">2:10</td><td class="p-3.5">50 ق</td></tr>
+                            <tr class="bg-slate-50"><td class="p-3.5 font-black">الحصة الثامنة</td><td class="p-3.5">2:10</td><td class="p-3.5">3:00</td><td class="p-3.5">50 ق</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. قسم القيادة والمركز الإعلامي (الميزة 22 & 23) -->
+        <section id="leadership-tab" class="tab-content hidden py-12 bg-white">
+            <div class="max-w-6xl mx-auto px-4 space-y-8">
+                <div class="flex flex-col md:flex-row items-center gap-8 royal-card-glow p-8 rounded-3xl">
+                    <div class="w-40 h-40 rounded-2xl border-4 border-royal-blue shadow-lg overflow-hidden shrink-0">
+                        <img src="https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/ed29e7d9e11dc73831d6fd097af0f34215d0ea8f/1000001501.jpg.png" alt="مدير المدرسة" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <span class="text-xs font-black text-royal-blue bg-blue-50 px-3 py-1 rounded-full"><i class="fa-solid fa-user-tie"></i> إدارة المدرسة</span>
+                        <h3 class="text-2xl font-black text-slate-900 mt-2">الأستاذ / أحمد إبراهيم</h3>
+                        <p class="text-xs font-bold royal-gradient-text mb-3">مدير مدرسة عمرو موسى الثانوية بنين</p>
+                        <p class="text-slate-600 text-sm leading-relaxed font-semibold italic">« أبنائي الطلاب، رسالتنا تتجاوز حدود المناهج إلى بناء أبطال ورجال يتحملون المسؤولية بعلم وانضباط. »</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row-reverse items-center gap-8 royal-card-glow p-8 rounded-3xl">
+                    <div class="w-40 h-40 rounded-2xl border-4 border-royal-gold shadow-lg overflow-hidden shrink-0">
+                        <img src="https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/refs/heads/main/1000001504.jpg.png" alt="المسؤول الإعلامي" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <span class="text-xs font-black text-royal-darkgold bg-amber-50 px-3 py-1 rounded-full"><i class="fa-solid fa-camera-retro"></i> المركز الإعلامي</span>
+                        <h3 class="text-2xl font-black text-slate-900 mt-2">الإعلامي / محمد عبدالله اللاوندي</h3>
+                        <p class="text-xs font-bold royal-gradient-text mb-3">المسؤول الإعلامي للتغطية المدرسية</p>
+                        <p class="text-slate-600 text-sm leading-relaxed font-semibold italic">« يلتزم المركز الإعلامي بنقل وتوثيق كافة الأنشطة والمبادرات المدرسية بأعلى مستويات الاحترافية الصحفية. »</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. قسم الخدمات الرقمية والنتائج (الميزة 12 & 13 & 14) -->
+        <section id="services-tab" class="tab-content hidden py-12 bg-white">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="royal-card-glow p-6 rounded-3xl text-center">
+                        <i class="fa-solid fa-square-poll-vertical text-3xl text-royal-blue mb-3"></i>
+                        <h4 class="font-black text-slate-900 text-base mb-2">استعلام النتائج</h4>
+                        <p class="text-slate-500 text-xs mb-4">بوابة النتائج الامتحانية لصفوف الثانوية.</p>
+                        <button onclick="alert('سيتم إتاحة استعلام النتائج فور اعتمادها!')" class="w-full bg-royal-blue text-white py-2 rounded-xl text-xs font-bold">دخول الخدمة</button>
+                    </div>
+                    <div class="royal-card-glow p-6 rounded-3xl text-center">
+                        <i class="fa-solid fa-clipboard-user text-3xl text-royal-darkgold mb-3"></i>
+                        <h4 class="font-black text-slate-900 text-base mb-2">متابعة غياب الطلاب</h4>
+                        <p class="text-slate-500 text-xs mb-4">خدمة أولياء الأمور لمتابعة الانضباط اليومي.</p>
+                        <button onclick="alert('بوابة المتابعة مفعّلة')" class="w-full bg-royal-darkgold text-white py-2 rounded-xl text-xs font-bold">دخول ولي الأمر</button>
+                    </div>
+                    <div class="royal-card-glow p-6 rounded-3xl text-center">
+                        <i class="fa-solid fa-book-bookmark text-3xl text-royal-blue mb-3"></i>
+                        <h4 class="font-black text-slate-900 text-base mb-2">المكتبة الرقمية</h4>
+                        <p class="text-slate-500 text-xs mb-4">تحميل الكتب والمذكرات الوزارية المجانية.</p>
+                        <button onclick="alert('جارٍ تجهيز ملفات المكتبة')" class="w-full bg-royal-blue text-white py-2 rounded-xl text-xs font-bold">تحميل الكتب</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. قسم الأسئلة الشائعة والإرشادات (الميزة 48) -->
+        <section id="faq-tab" class="tab-content hidden py-12 bg-white">
+            <div class="max-w-4xl mx-auto px-4 space-y-4">
+                <div class="royal-card-glow p-5 rounded-2xl">
+                    <h4 class="font-black text-royal-blue text-sm mb-1"><i class="fa-solid fa-circle-info ml-1"></i> ما هي مواعيد الحضور الرسمية للمدرسة؟</h4>
+                    <p class="text-slate-600 text-xs">بدء الطابور في تمام الساعة 7:45 صباحاً وتنتهي الحصة الثامنة في 3:00 مساءً.</p>
+                </div>
+                <div class="royal-card-glow p-5 rounded-2xl">
+                    <h4 class="font-black text-royal-blue text-sm mb-1"><i class="fa-solid fa-mobile-screen-button ml-1"></i> كيف يمكن التواصل مع مطور الموقع؟</h4>
+                    <p class="text-slate-600 text-xs">يمكن التواصل مباشر عبر الواتساب على الرقم 01120918805 مع المطور محمد أحمد شوقي.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="royal-gradient-bg text-white py-12 text-xs border-t-2 border-royal-gold relative z-20">
+            <div class="max-w-7xl mx-auto px-4 text-center space-y-6">
+                <p class="text-slate-200 font-bold">جميع الحقوق محفوظة © 2026 - مدرسة عمرو موسى الثانوية بنين</p>
+
+                <!-- الميزة 24: بطاقة تعريف المطور -->
+                <a href="https://wa.me/201120918805" target="_blank" class="inline-flex items-center gap-2 bg-black/40 px-6 py-2.5 rounded-2xl border border-royal-gold/50 text-royal-gold font-black shadow-xl backdrop-blur-md">
+                    <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i>
+                    <span>تطوير وإدارة الموقع: <strong class="text-white">محمد أحمد شوقي (01120918805)</strong></span>
+                </a>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- الميزة 20: زر الصعود لأعلى -->
+    <button id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-6 left-6 z-50 bg-royal-blue text-white p-3.5 rounded-full shadow-2xl border-2 border-royal-gold hidden">
+        <i class="fa-solid fa-arrow-up text-base"></i>
+    </button>
+
+    <!-- الميزة 2: زر الواتساب المباشر -->
+    <a href="https://wa.me/201120918805" target="_blank" class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-2xl flex items-center justify-center border-2 border-white">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        // الميزة 1: التوجيه التلقائي المباشر عند فتح الموقع إلى قسم الفيديوهات والأخبار
+        document.addEventListener("DOMContentLoaded", () => {
+            const newsSection = document.getElementById('news-tab');
+            if (newsSection) {
+                setTimeout(() => {
+                    newsSection.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            }
+        });
+
+        // الميزة 38: ساعة مصر الحية
+        function updateClock() {
+            const now = new Date();
+            const clockEl = document.getElementById('egyptClock');
+            if (clockEl) {
+                clockEl.innerHTML = `<i class="fa-solid fa-clock ml-1"></i> ${now.toLocaleTimeString('ar-EG')}`;
+            }
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // دالة التبديل بين الأقسام
+        function switchTab(tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.add('hidden'));
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active-tab'));
+
+            const targetContent = document.getElementById(tabId);
+            if (targetContent) targetContent.classList.remove('hidden');
+
+            const targetBtn = document.getElementById('btn-' + tabId);
+            if (targetBtn) targetBtn.classList.add('active-tab');
+        }
+
+        // الميزة 9: نظام الجسيمات
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.isGold = Math.random() > 0.5;
+                this.alpha = Math.random() * 0.3 + 0.1;
+            }
+            update() {
+                this.x += this.speedX; this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0; if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0; if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = this.isGold ? `rgba(184, 134, 11, ${this.alpha})` : `rgba(0, 0, 128, ${this.alpha})`;
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+            }
+        }
+        function initParticles() { particlesArray = []; for (let i = 0; i < 40; i++) particlesArray.push(new Particle()); }
+        function animateParticles() { ctx.clearRect(0, 0, canvas.width, canvas.height); particlesArray.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
+        initParticles(); animateParticles();
+
+        // الميزة 8 & 20: التحكم بشريط القراءة وزر الصعود
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+
+            const btn = document.getElementById('scrollTopBtn');
+            if (winScroll > 300) btn.classList.remove('hidden'); else btn.classList.add('hidden');
+        });
+    </script>
+    <script src="news.js"></script>
+</body>
+</html>
             display: flex !important;
         }
 
