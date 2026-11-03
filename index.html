@@ -30,9 +30,14 @@
                         amiri: ['Amiri', 'serif']
                     },
                     animation: {
+                        'marquee': 'marquee 22s linear infinite',
                         'float': 'float 4s ease-in-out infinite'
                     },
                     keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(100%)' },
+                            '100%': { transform: 'translateX(-100%)' }
+                        },
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-10px)' }
@@ -48,10 +53,30 @@
             background-color: #ffffff;
             color: #0f172a;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
             background-image: 
                 radial-gradient(circle at 50% 50%, rgba(0, 0, 128, 0.03) 0%, transparent 70%),
                 radial-gradient(rgba(0, 0, 128, 0.04) 1px, transparent 1px);
             background-size: 100% 100%, 30px 30px;
+        }
+
+        /* الوضع الداكن الملوكي */
+        body.dark-mode {
+            background-color: #050714;
+            color: #f1f5f9;
+        }
+        body.dark-mode .royal-card-glow {
+            background-color: #0b0f24;
+            border-color: rgba(255, 215, 0, 0.3);
+            color: #ffffff;
+        }
+        body.dark-mode header {
+            background-color: rgba(5, 7, 20, 0.95);
+        }
+        body.dark-mode .tab-btn {
+            background-color: #0d122b;
+            color: #ffffff;
+            border-color: rgba(0, 0, 128, 0.5);
         }
 
         .royal-gradient-text {
@@ -81,7 +106,6 @@
             box-shadow: 0 15px 35px -5px rgba(0, 0, 128, 0.15);
         }
 
-        /* زرار الأقسام التفاعلي الفخم */
         .tab-btn {
             background-color: #ffffff;
             color: #000080;
@@ -114,18 +138,44 @@
         ::-webkit-scrollbar-thumb { background: #000080; border-radius: 4px; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-royal-blue selection:text-white relative">
+<body id="bodyElement" class="min-h-screen flex flex-col justify-between selection:bg-royal-blue selection:text-white relative">
 
-    <!-- خلفية النجوم والجسيمات التفاعلية -->
+    <!-- خلفية الجسيمات التفاعلية -->
     <canvas id="particles"></canvas>
 
     <!-- شريط تقدم القراءة -->
     <div id="progressBar" class="fixed top-0 left-0 h-1.5 gold-gradient-bg z-50 transition-all duration-150 w-0"></div>
 
     <div class="relative z-10 flex flex-col justify-between min-h-screen">
+        
+        <!-- شريط الأخبار العاجلة الرسمي للإدارة -->
+        <div class="royal-gradient-bg text-white text-xs py-2.5 px-4 border-b-2 border-royal-gold relative z-40 shadow-md">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+                <div class="flex items-center gap-3 w-full md:w-auto overflow-hidden">
+                    <span class="gold-gradient-bg text-black px-3.5 py-1 rounded-full font-black text-[10px] flex items-center gap-1.5 shrink-0 shadow-md animate-pulse">
+                        <i class="fa-solid fa-bullhorn"></i> تنبيه هام وعاجل
+                    </span>
+                    <div class="overflow-hidden whitespace-nowrap w-full">
+                        <p class="inline-block animate-marquee text-amber-200 font-bold">
+                            🚨 تنبيه رسمي من إدارة مدرسة عمرو موسى الثانوية بنين: متابعة جداول الحصص والتغطيات الإعلامية أولاً بأول | أهلاً بكم في البوابة الرسمية!
+                        </p>
+                    </div>
+                </div>
 
-        <!-- الهيدر الرئيسي والشعار -->
-        <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-xl border-b-2 border-royal-blue/20 shadow-md">
+                <div class="flex items-center gap-3 shrink-0 font-bold text-[11px]">
+                    <!-- الميزة 3: مؤشر الاتصال -->
+                    <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 px-2.5 py-0.5 rounded-full text-[10px] flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> متصل مباشرة
+                    </span>
+                    <a href="https://wa.me/201120918805" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-1 rounded-full border border-emerald-400 transition flex items-center gap-1.5 shadow-sm">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> المطور: محمد أحمد شوقي
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- الهيدر الرئيسي -->
+        <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-xl border-b-2 border-royal-blue/20 shadow-md transition duration-300">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-20">
                     <div class="flex items-center space-x-4 space-x-reverse">
@@ -146,14 +196,23 @@
                         </a>
                     </div>
 
-                    <div class="flex items-center gap-3">
-                        <span id="egyptClock" class="hidden sm:inline text-xs font-bold text-royal-blue bg-blue-50 px-3 py-1.5 rounded-full border border-royal-blue/20"><i class="fa-solid fa-clock ml-1"></i> جارٍ التحميل...</span>
+                    <!-- أزرار الميزات المضافة -->
+                    <div class="flex items-center gap-2">
+                        <!-- الميزة 1: زر الوضع الليلي -->
+                        <button onclick="toggleDarkMode()" class="p-2.5 rounded-full border border-royal-blue/20 bg-slate-100 text-royal-blue hover:bg-royal-blue hover:text-white transition" title="تبديل الوضع الليلي">
+                            <i id="darkModeIcon" class="fa-solid fa-moon"></i>
+                        </button>
+                        <!-- الميزة 4: تكبير الخط -->
+                        <button onclick="changeFontSize(1)" class="px-2.5 py-1 rounded-lg border border-royal-blue/20 bg-slate-100 text-xs font-black text-royal-blue hover:bg-royal-blue hover:text-white transition">+A</button>
+                        <button onclick="changeFontSize(-1)" class="px-2.5 py-1 rounded-lg border border-royal-blue/20 bg-slate-100 text-xs font-black text-royal-blue hover:bg-royal-blue hover:text-white transition">-A</button>
+                        <!-- الساعة -->
+                        <span id="egyptClock" class="hidden md:inline text-xs font-bold text-royal-blue bg-blue-50 px-3 py-1.5 rounded-full border border-royal-blue/20"><i class="fa-solid fa-clock ml-1"></i> جارٍ التحميل...</span>
                     </div>
                 </div>
             </div>
         </header>
 
-        <!-- الهيرو شريط اختيار القسم الخالي من الزحمة -->
+        <!-- الهيرو وشريط الأقسام المستقلة -->
         <section class="relative py-10 text-center bg-gradient-to-b from-sky-50/60 via-white to-slate-50 border-b border-royal-blue/10">
             <div class="max-w-7xl mx-auto px-4 relative z-10">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border-2 border-royal-blue bg-white text-royal-blue text-xs font-black mb-4 shadow-sm animate-float">
@@ -184,9 +243,9 @@
             </div>
         </section>
 
-        <!-- الأقسام (كل قسم مستقل 100% ولا يظهر مع الأقسام الأخرى) -->
+        <!-- الأقسام المستقلة -->
 
-        <!-- 1. قسم الأخبار والفيديوهات والصور (القسم الرئيسي المفعل المباشر) -->
+        <!-- 1. قسم الأخبار والفيديوهات (المباشر) -->
         <main id="news-tab" class="tab-content py-12 bg-white flex-grow">
             <div class="max-w-7xl mx-auto px-4">
                 <div class="text-center mb-10">
@@ -197,9 +256,8 @@
                     <p class="text-slate-500 text-xs font-semibold mt-1">تغطية مرئية مستمرة لكافة أنشطة ومنافسات أبطال المدرسة</p>
                 </div>
 
-                <!-- الفيديوهات والأخبار الديناميكية المضافة من news.js -->
+                <!-- شبكة الكروت والفيديوهات من news.js -->
                 <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- تظهر هنا الكروت والفيديوهات تلقائياً -->
                 </div>
             </div>
         </main>
@@ -271,7 +329,7 @@
             </div>
         </main>
 
-        <!-- 4. قسم البوابة والخدمات الرقمية -->
+        <!-- 4. قسم الخدمات الرقمية -->
         <main id="services-tab" class="tab-content hidden py-12 bg-white flex-grow">
             <div class="max-w-6xl mx-auto px-4">
                 <div class="text-center mb-10">
@@ -306,16 +364,21 @@
             <div class="max-w-7xl mx-auto px-4 text-center space-y-4">
                 <p class="text-slate-200 font-bold">جميع الحقوق محفوظة © 2026 - مدرسة عمرو موسى الثانوية بنين</p>
 
-                <a href="https://wa.me/201120918805" target="_blank" class="inline-flex items-center gap-2 bg-black/40 px-6 py-2.5 rounded-2xl border border-royal-gold/50 text-royal-gold font-black shadow-xl backdrop-blur-md hover:bg-black/60 transition">
-                    <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i>
-                    <span>تطوير وإدارة الموقع: <strong class="text-white">محمد أحمد شوقي (01120918805)</strong></span>
-                </a>
+                <div class="flex flex-wrap justify-center items-center gap-3">
+                    <a href="https://wa.me/201120918805" target="_blank" class="inline-flex items-center gap-2 bg-black/40 px-6 py-2.5 rounded-2xl border border-royal-gold/50 text-royal-gold font-black shadow-xl backdrop-blur-md hover:bg-black/60 transition">
+                        <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i>
+                        <span>تطوير وإدارة الموقع: <strong class="text-white">محمد أحمد شوقي (01120918805)</strong></span>
+                    </a>
+                    <!-- الميزة 2 & 6: نسخ الرقم والمشاركة -->
+                    <button onclick="copyPhone()" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-2xl border border-white/20 font-bold transition flex items-center gap-1.5"><i class="fa-solid fa-copy"></i> نسخ الرقم</button>
+                    <button onclick="shareWebsite()" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-2xl border border-white/20 font-bold transition flex items-center gap-1.5"><i class="fa-solid fa-share-nodes"></i> مشاركة الموقع</button>
+                </div>
             </div>
         </footer>
 
     </div>
 
-    <!-- زر الواتساب المباشر لرقم المطور -->
+    <!-- زر الواتساب المباشر לרقم المطور -->
     <a href="https://wa.me/201120918805" target="_blank" class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-2xl flex items-center justify-center border-2 border-white transition duration-300 transform hover:scale-110">
         <i class="fa-brands fa-whatsapp text-3xl"></i>
     </a>
@@ -332,6 +395,48 @@
             }
         });
 
+        // الميزة 1: التبديل للوضع الليلي
+        function toggleDarkMode() {
+            const body = document.getElementById('bodyElement');
+            const icon = document.getElementById('darkModeIcon');
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        // الميزة 4: التحكم بحجم الخط
+        let currentFontSize = 100;
+        function changeFontSize(delta) {
+            currentFontSize += delta * 5;
+            if (currentFontSize < 85) currentFontSize = 85;
+            if (currentFontSize > 125) currentFontSize = 125;
+            document.body.style.fontSize = currentFontSize + '%';
+        }
+
+        // الميزة 2: نسخ الرقم
+        function copyPhone() {
+            navigator.clipboard.writeText("01120918805");
+            alert("تم نسخ رقم المطور (01120918805) بنجاح!");
+        }
+
+        // الميزة 6: مشاركة الموقع
+        function shareWebsite() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'مدرسة عمرو موسى الثانوية بنين',
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert("تم نسخ رابط الموقع للمشاركة!");
+            }
+        }
+
         // ساعة مصر الحية
         function updateClock() {
             const now = new Date();
@@ -343,26 +448,22 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // دالة التبديل الحقيقية والفصل التام بين الأقسام
+        // دالة التبديل بين الأقسام
         function switchTab(tabId) {
-            // إخفاء كل المحتويات المفتوحة
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.add('hidden'));
 
-            // إزالة التنشيط من الزراير
             const buttons = document.querySelectorAll('.tab-btn');
             buttons.forEach(btn => btn.classList.remove('active-tab'));
 
-            // إظهار المحتوى المطلوب حصرياً
             const targetContent = document.getElementById(tabId);
             if (targetContent) targetContent.classList.remove('hidden');
 
-            // تنشيط الزر المحدد
             const targetBtn = document.getElementById('btn-' + tabId);
             if (targetBtn) targetBtn.classList.add('active-tab');
         }
 
-        // نظام الجسيمات التفاعلية
+        // نظام الجسيمات
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         let particlesArray = [];
