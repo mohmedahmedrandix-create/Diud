@@ -131,6 +131,83 @@
         .quick-ai-btn:hover { background:#000080; color:#fff; }
         #aiChatModal { max-height: min(80vh, 650px); }
         @media (max-width: 420px) { #aiChatModal { width: calc(100vw - 24px); left:12px; bottom:76px; } }
+        /* ================= تحسينات التصميم الملكي ================= */
+        @keyframes shimmer {
+            0% { background-position: 200% center; }
+            100% { background-position: -200% center; }
+        }
+        .royal-gradient-text {
+            background-size: 200% auto;
+            animation: shimmer 6s linear infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, .30); }
+            50% { box-shadow: 0 0 45px rgba(255, 215, 0, .55); }
+        }
+        .tab-btn.active-tab { animation: glowPulse 2.5s ease-in-out infinite; }
+
+        /* ظهور تدريجي عند التمرير */
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px) scale(.98);
+            transition: opacity .8s cubic-bezier(.16, 1, .3, 1), transform .8s cubic-bezier(.16, 1, .3, 1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0) scale(1); }
+
+        /* لمعة ذهبية تعبر الكارت عند الـ hover */
+        .royal-card-glow { position: relative; overflow: hidden; }
+        .royal-card-glow::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 30%, rgba(255, 215, 0, .14) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform .9s ease;
+            pointer-events: none;
+        }
+        .royal-card-glow:hover::before { transform: translateX(100%); }
+
+        /* شارات معلومات سريعة */
+        .chip {
+            background: #fff;
+            border: 1.5px solid rgba(0, 0, 128, .18);
+            color: #000080;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 8px 16px;
+            border-radius: 999px;
+            box-shadow: 0 4px 12px rgba(0, 0, 128, .08);
+            transition: all .3s ease;
+        }
+        .chip:hover {
+            transform: translateY(-3px);
+            border-color: #FFD700;
+            box-shadow: 0 8px 20px rgba(0, 0, 128, .15);
+        }
+
+        /* فاصل ذهبي متموج */
+        .gold-divider {
+            height: 3px;
+            width: 140px;
+            margin: 0 auto 2rem;
+            border-radius: 999px;
+            background: linear-gradient(90deg, transparent, #FFD700, #B8860B, #FFD700, transparent);
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+
+        /* لمسة على اللوجو */
+        #schoolLogoImg { transition: transform .5s ease; }
+        .group:hover #schoolLogoImg { transform: scale(1.08) rotate(-3deg); }
+
+        /* طباعة جدول الحصص فقط */
+        @media print {
+            header, footer, #particles, #progressBar, .tab-btn, .fixed, #aiChatModal, .no-print { display: none !important; }
+            body { background: #fff !important; }
+            .tab-content { display: none !important; }
+            #schedule-tab { display: block !important; }
+        }
     </style>
 <base target="_blank">
 </head>
@@ -195,7 +272,11 @@
         </header>
 
         <!-- الهيرو والأقسام -->
-        <section class="relative py-12 text-center bg-gradient-to-b from-sky-50/60 via-white to-slate-50 border-b border-royal-blue/10">
+        <section class="relative py-12 text-center bg-gradient-to-b from-sky-50/60 via-white to-slate-50 border-b border-royal-blue/10 overflow-hidden">
+            <div class="absolute inset-0 pointer-events-none">
+                <div class="absolute -top-24 right-10 w-72 h-72 bg-royal-blue/10 rounded-full blur-3xl animate-pulse"></div>
+                <div class="absolute -bottom-10 left-10 w-80 h-80 bg-royal-gold/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 1.5s"></div>
+            </div>
             <div class="max-w-7xl mx-auto px-4 relative z-10">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border-2 border-royal-blue bg-white text-royal-blue text-xs font-black mb-4 shadow-sm animate-float">
                     <i class="fa-solid fa-shield-halved text-royal-darkgold"></i> الصرح التعليمي والتربوي الأول بالقناطر الخيرية
@@ -206,6 +287,13 @@
                 <p class="text-2xl md:text-3xl font-amiri font-extrabold royal-gradient-text tracking-wider mb-8">
                     « بالقناطر الخيرية - مصنع الرجال »
                 </p>
+
+                <div class="flex flex-wrap justify-center gap-3 mb-8">
+                    <span class="chip"><i class="fa-solid fa-graduation-cap ml-1"></i> المرحلة: الثانوية بنين</span>
+                    <span class="chip"><i class="fa-solid fa-location-dot ml-1 text-red-500"></i> القناطر الخيرية - القليوبية</span>
+                    <span class="chip"><i class="fa-solid fa-calendar-days ml-1"></i> العام الدراسي 2026 / 2027</span>
+                </div>
+                <div class="gold-divider"></div>
 
                 <!-- أزرار الأقسام المستقلة -->
                 <div class="flex flex-wrap justify-center items-center gap-3 max-w-5xl mx-auto p-3 bg-slate-100/90 rounded-3xl border border-slate-200 shadow-inner">
@@ -332,6 +420,20 @@
                         <p class="text-slate-600 text-sm leading-relaxed font-semibold italic border-r-4 border-royal-gold pr-4 bg-slate-50 p-4 rounded-xl">« يلتزم المركز الإعلامي بنقل وتوثيق كافة الأنشطة والمبادرات المدرسية بأعلى مستويات الدقة والاحترافية الصحفية. »</p>
                     </div>
                 </div>
+                <div class="flex flex-col md:flex-row items-center gap-8 royal-card-glow p-8 rounded-3xl">
+                    <div class="shrink-0 text-center">
+                        <div class="w-40 h-40 rounded-2xl border-4 border-royal-blue shadow-lg overflow-hidden">
+                            <img src="https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/refs/heads/main/1000001738.jpg" alt="وكيل المدرسة الأستاذ محمد عبد الواحد" class="w-full h-full object-cover">
+                        </div>
+                        <p class="mt-3 text-xs font-black text-royal-blue">وكيل المدرسة<br><span class="royal-gradient-text">محمد عبد الواحد</span></p>
+                    </div>
+                    <div>
+                        <span class="text-xs font-black text-royal-blue bg-blue-50 px-3.5 py-1.5 rounded-full"><i class="fa-solid fa-user-shield"></i> إدارة المدرسة</span>
+                        <h3 class="text-2xl font-black text-slate-900 mt-3 mb-1">الأستاذ / محمد عبد الواحد</h3>
+                        <p class="text-xs font-bold royal-gradient-text mb-4">وكيل مدرسة عمرو موسى الثانوية بنين بالقناطر الخيرية</p>
+                        <p class="text-slate-600 text-sm leading-relaxed font-semibold italic border-r-4 border-royal-blue pr-4 bg-slate-50 p-4 rounded-xl">« سيتم إضافة كلمة وكيل المدرسة قريباً بإذن الله. »</p>
+                    </div>
+                </div>
             </div>
         </main>
 
@@ -343,12 +445,14 @@
                     <h2 class="text-3xl font-black text-royal-blue">منظومة خدمات الطلاب وأولياء الأمور</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="royal-card-glow p-8 text-center">
-                        <i class="fa-solid fa-square-poll-vertical text-4xl text-royal-blue mb-4"></i>
-                        <h4 class="font-black text-slate-900 text-base mb-2">استعلام النتائج الامتحانية</h4>
-                        <p class="text-slate-500 text-xs mb-6">بوابة النتائج الرسمية لصفوف المرحلة الثانوية بالقناطر.</p>
-                        <button onclick="alert('سيتم إتاحة استعلام النتائج فور اعتمادها رسمياً!')" class="w-full bg-royal-blue text-white py-3 rounded-xl text-xs font-bold shadow-md hover:bg-royal-navy transition">دخول الخدمة</button>
-                    </div>
+                    <a href="https://me-portal.qureo.education/login" target="_blank" rel="noopener" class="royal-card-glow p-6 text-center flex flex-col items-center justify-center gap-4">
+                        <div class="w-full rounded-2xl overflow-hidden border-2 border-royal-blue/20 shadow-md bg-white flex items-center justify-center p-3">
+                            <img src="https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/refs/heads/main/%D8%B4%D8%B9%D8%A7%D8%B1%20%D8%B3%D8%A8%D8%B1%D9%83%D8%B3%20%D8%A8%D9%88%D8%A7%D8%A8%D8%A9%20%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85%20%D8%A7%D9%84%D8%AA%D9%82%D9%86%D9%8A.png" alt="شعار بوابة التعليم التقني - سبركس" class="w-full h-auto object-contain">
+                        </div>
+                        <h4 class="font-black text-slate-900 text-base">بوابة التعليم التقني - سبركس</h4>
+                        <p class="text-slate-500 text-xs">اضغط للدخول إلى بوابة التعلم الذكي لطلاب المدرسة</p>
+                        <span class="w-full gold-gradient-bg text-black py-3 rounded-xl text-xs font-black shadow-md"><i class="fa-solid fa-right-to-bracket ml-1"></i> دخول البوابة</span>
+                    </a>
                     <div class="royal-card-glow p-8 text-center">
                         <i class="fa-solid fa-clipboard-user text-4xl text-royal-darkgold mb-4"></i>
                         <h4 class="font-black text-slate-900 text-base mb-2">متابعة انضباط الطلاب</h4>
@@ -368,6 +472,31 @@
         <!-- التذييل -->
         <footer class="royal-gradient-bg text-white py-12 text-xs border-t-2 border-royal-gold relative z-20">
             <div class="max-w-7xl mx-auto px-4 text-center space-y-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-right mb-8 border-b border-white/10 pb-8">
+                    <div class="space-y-2">
+                        <h5 class="font-black text-royal-gold text-sm mb-2"><i class="fa-solid fa-school"></i> المدرسة</h5>
+                        <p class="text-slate-300 font-bold text-[11px]">مدرسة عمرو موسى الثانوية بنين</p>
+                        <p class="text-slate-400 text-[11px]">القناطر الخيرية - محافظة القليوبية</p>
+                    </div>
+                    <div class="space-y-2">
+                        <h5 class="font-black text-royal-gold text-sm mb-2"><i class="fa-solid fa-link"></i> أقسام الموقع</h5>
+                        <button onclick="switchTab('news-tab')" class="block text-slate-300 hover:text-royal-gold transition font-bold text-[11px]">الأخبار والفيديوهات</button>
+                        <button onclick="switchTab('schedule-tab')" class="block text-slate-300 hover:text-royal-gold transition font-bold text-[11px]">جدول الحصص</button>
+                        <button onclick="switchTab('weather-tab')" class="block text-slate-300 hover:text-royal-gold transition font-bold text-[11px]">الطقس اليومي</button>
+                    </div>
+                    <div class="space-y-2">
+                        <h5 class="font-black text-royal-gold text-sm mb-2"><i class="fa-solid fa-bolt"></i> خدمات</h5>
+                        <button onclick="switchTab('services-tab')" class="block text-slate-300 hover:text-royal-gold transition font-bold text-[11px]">البوابة الرقمية</button>
+                        <button onclick="switchTab('leadership-tab')" class="block text-slate-300 hover:text-royal-gold transition font-bold text-[11px]">القيادة</button>
+                        <a href="https://me-portal.qureo.education/login" target="_blank" class="block text-slate-300 hover:text-royal-gold transition font-bold text-[11px]">بوابة سبركس</a>
+                    </div>
+                    <div class="space-y-2">
+                        <h5 class="font-black text-royal-gold text-sm mb-2"><i class="fa-solid fa-headset"></i> تواصل معنا</h5>
+                        <a href="https://wa.me/201120918805" target="_blank" class="block text-slate-300 hover:text-emerald-400 transition font-bold text-[11px]"><i class="fa-brands fa-whatsapp ml-1"></i> واتساب المدرسة</a>
+                        <a href="https://www.facebook.com/amrmosathanwy/?locale=ar_AR" target="_blank" class="block text-slate-300 hover:text-blue-400 transition font-bold text-[11px]"><i class="fa-brands fa-facebook ml-1"></i> فيسبوك</a>
+                    </div>
+                </div>
+
                 <p class="text-slate-200 font-bold">جميع الحقوق محفوظة © 2026 - مدرسة عمرو موسى الثانوية بنين بالقناطر الخيرية</p>
 
                 <div class="flex flex-wrap justify-center items-center gap-3">
@@ -648,6 +777,45 @@
             const scrolled = (winScroll / height) * 100;
             document.getElementById("progressBar").style.width = scrolled + "%";
         });
+
+        /* ============ تحسينات التفاعل ============ */
+
+        // ظهور تدريجي للعناصر عند التمرير
+        const revealTargets = document.querySelectorAll('.royal-card-glow, .tab-content h2, .chip, #weatherWidget');
+        revealTargets.forEach(el => el.classList.add('reveal'));
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        revealTargets.forEach(el => revealObserver.observe(el));
+
+        // حالة أنيقة لو مفيش أخبار (news.js مش متاح)
+        setTimeout(() => {
+            const grid = document.getElementById('newsGrid');
+            if (grid && grid.children.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full royal-card-glow text-center py-14">
+                        <i class="fa-solid fa-photo-film text-5xl royal-gradient-text mb-4"></i>
+                        <h3 class="font-black text-royal-blue text-lg mb-2">لا توجد تغطيات منشورة حاليًا</h3>
+                        <p class="text-slate-500 text-xs font-bold">تابع صفحة الفيسبوك الرسمية لأحدث صور وأنشطة المدرسة</p>
+                        <a href="https://www.facebook.com/amrmosathanwy/?locale=ar_AR" target="_blank" class="inline-block mt-5 bg-blue-600 text-white text-xs font-black px-6 py-3 rounded-xl shadow-md hover:bg-blue-700 transition"><i class="fa-brands fa-facebook ml-1"></i> صفحة الفيسبوك</a>
+                    </div>`;
+            }
+        }, 2500);
+
+        // تمرير سلس لأعلى القسم عند التبديل بين التبويبات
+        const _origSwitchTab = switchTab;
+        switchTab = function(tabId) {
+            _origSwitchTab(tabId);
+            setTimeout(() => {
+                const el = document.getElementById(tabId);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 60);
+        };
     </script>
     <script src="news.js"></script>
 </body>
