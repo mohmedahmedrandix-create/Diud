@@ -833,6 +833,7 @@
            الشخص المسؤول يضيف خبرًا جديدًا في الشيت فقط، والموقع بيتحدث تلقائيًا
            ===================================================================== */
         const NEWS_SHEET_ID = 'PUT_SHEET_ID_HERE'; // معرف شيت الأخبار (يتم وضعه مرة واحدة)
+        const NEWS_JSON_URL = 'https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/main/news.json'; // ملف الأخبار في الريبو — عدّل المسار لو حطيته في فولدر
         const SHEET_TAB = 'news'; // اسم التبويب داخل الشيت
         const COUNTER_NS_NEWS = 'amr-mousa-school';
 
@@ -1066,11 +1067,37 @@
                                 badge: row.badge || 'تغطية',
                                 images: (row.images || '').split(',').map(s => s.trim()).filter(Boolean),
                                 video: (row.video || '').trim(),
+                                memorial: /^(true|1|نعم|yes)$/i.test((row.memorial || '').trim()),
                             })).filter(n => n.title);
                             if (parsed.length) items = parsed;
                         }
                     }
                 } catch (e) { /* الشيت مش متوفر — هنعرض الأخبار الاحتياطية */ }
+            }
+
+            if (!items) {
+                // المحاولة التانية: ملف news.json على GitHub (من غير تعديل الكود)
+                try {
+                    const rj = await fetch(NEWS_JSON_URL + '?v=' + Date.now());
+                    if (rj.ok) {
+                        const arr = await rj.json();
+                        if (Array.isArray(arr) && arr.length) {
+                            const parsed = arr.map(row => ({
+                                title: row.title || '',
+                                desc: row.desc || '',
+                                quote: row.quote || '',
+                                date: row.date || '',
+                                category: row.category || '',
+                                place: row.place || '',
+                                badge: row.badge || 'تغطية',
+                                images: Array.isArray(row.images) ? row.images.filter(Boolean) : (row.images || '').split(',').map(s => s.trim()).filter(Boolean),
+                                video: (row.video || '').trim(),
+                                memorial: row.memorial === true || /^(true|1|نعم|yes)$/i.test(String(row.memorial || '').trim()),
+                            })).filter(n => n.title);
+                            if (parsed.length) items = parsed;
+                        }
+                    }
+                } catch (e) { /* ملف JSON مش متوفر — هنعرض الأخبار الاحتياطية */ }
             }
 
             if (!items) items = fallbackNews;
