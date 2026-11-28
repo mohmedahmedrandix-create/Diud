@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" class="scroll-smooth">
 <head>
@@ -13,6 +11,8 @@
     <meta name="author" content="محمد أحمد شوقي">
     <meta name="robots" content="index, follow">
 
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -132,7 +132,7 @@
         .quick-ai-btn:hover { background:#000080; color:#fff; }
         #aiChatModal { max-height: min(80vh, 650px); }
         @media (max-width: 420px) { #aiChatModal { width: calc(100vw - 24px); left:12px; bottom:76px; } }
-        /* ================= تحسينات التصميم الملكي ================= */
+
         @keyframes shimmer {
             0% { background-position: 200% center; }
             100% { background-position: -200% center; }
@@ -148,7 +148,6 @@
         }
         .tab-btn.active-tab { animation: glowPulse 2.5s ease-in-out infinite; }
 
-        /* ظهور تدريجي عند التمرير */
         .reveal {
             opacity: 0;
             transform: translateY(35px) scale(.98);
@@ -156,7 +155,6 @@
         }
         .reveal.visible { opacity: 1; transform: translateY(0) scale(1); }
 
-        /* لمعة ذهبية تعبر الكارت عند الـ hover */
         .royal-card-glow { position: relative; overflow: hidden; }
         .royal-card-glow::before {
             content: '';
@@ -169,7 +167,6 @@
         }
         .royal-card-glow:hover::before { transform: translateX(100%); }
 
-        /* شارات معلومات سريعة */
         .chip {
             background: #fff;
             border: 1.5px solid rgba(0, 0, 128, .18);
@@ -187,7 +184,6 @@
             box-shadow: 0 8px 20px rgba(0, 0, 128, .15);
         }
 
-        /* فاصل ذهبي متموج */
         .gold-divider {
             height: 3px;
             width: 140px;
@@ -198,12 +194,9 @@
             animation: shimmer 3s linear infinite;
         }
 
-        /* لمسة على اللوجو */
         #schoolLogoImg { transition: transform .5s ease; }
         .group:hover #schoolLogoImg { transform: scale(1.08) rotate(-3deg); }
 
-
-        /* نمط التعزية — بروز شيك وهادئ لخبر الوفاة */
         .memorial-mode {
             background: linear-gradient(180deg, #0b1130 0%, #060a1f 100%) !important;
             border-color: rgba(148,163,184,.35) !important;
@@ -227,17 +220,14 @@
         .memorial-mode .bg-amber-50 { background: rgba(148,163,184,.12) !important; border-color: rgba(148,163,184,.35) !important; }
         .memorial-mode .bg-slate-100 { background: rgba(148,163,184,.14) !important; }
         .memorial-mode .bg-slate-50 { background: rgba(148,163,184,.08) !important; }
-        .memorial-mode #likeBtn_ { }
 
-        /* طباعة جدول الحصص فقط */
         @media print {
-            header, footer, #particles, #progressBar, .tab-btn, .fixed, #aiChatModal, .no-print { display: none !important; }
+            header, footer, #particles, #progressBar, .tab-btn, .fixed, #aiChatModal, #adminNewsModal, .no-print { display: none !important; }
             body { background: #fff !important; }
             .tab-content { display: none !important; }
             #schedule-tab { display: block !important; }
         }
     </style>
-<base target="_blank">
 <base target="_blank">
 </head>
 <body id="bodyElement" class="min-h-screen flex flex-col justify-between selection:bg-royal-blue selection:text-white relative">
@@ -343,8 +333,6 @@
             </div>
         </section>
 
-        <!-- الأقسام المستقلة -->
-
         <!-- 1. قسم الأخبار والفيديوهات -->
         <main id="news-tab" class="tab-content py-16 bg-white flex-grow">
             <div class="max-w-7xl mx-auto px-4">
@@ -354,6 +342,11 @@
                     </span>
                     <h2 class="text-3xl font-black text-royal-blue">أحدث التغطيات والفيديوهات والصور</h2>
                     <p class="text-slate-500 text-xs font-semibold mt-2">تغطية مرئية مستمرة لكافة أنشطة ومنافسات أبطال المدرسة</p>
+                    <div class="mt-4">
+                        <button id="openAdminNewsBtn" type="button" onclick="openAdminModal()" class="inline-flex items-center gap-2 bg-royal-blue hover:bg-royal-navy text-white text-xs font-black px-5 py-2.5 rounded-full border border-royal-gold shadow transition">
+                            <i class="fa-solid fa-plus-circle text-royal-gold"></i> إضافة خبر / رفع ملف
+                        </button>
+                    </div>
                 </div>
                 <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="col-span-full text-center py-16">
@@ -452,6 +445,7 @@
                         <p class="text-slate-600 text-sm leading-relaxed font-semibold italic border-r-4 border-royal-gold pr-4 bg-slate-50 p-4 rounded-xl">« يلتزم المركز الإعلامي بنقل وتوثيق كافة الأنشطة والمبادرات المدرسية بأعلى مستويات الدقة والاحترافية الصحفية. »</p>
                     </div>
                 </div>
+
                 <div class="flex flex-col md:flex-row items-center gap-8 royal-card-glow p-8 rounded-3xl">
                     <div class="shrink-0 text-center">
                         <div class="w-40 h-40 rounded-2xl border-4 border-royal-blue shadow-lg overflow-hidden">
@@ -550,7 +544,73 @@
 
     </div>
 
-    <!-- 🤖 المعلم الذكي الأكاديمي (أيقونة الشات بوت العائمة ومربوطة بـ Groq API) -->
+    <!-- نافذة إضافة خبر جديد ورفع صور/فيديو مباشرة إلى Supabase -->
+    <div id="adminNewsModal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl border-2 border-royal-blue max-w-xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto text-right">
+            <div class="flex items-center justify-between border-b pb-3">
+                <h3 class="font-black text-royal-blue text-lg"><i class="fa-solid fa-cloud-arrow-up ml-2 text-royal-darkgold"></i> نشر خبر جديد ورفع ملفات</h3>
+                <button onclick="closeAdminModal()" class="text-slate-500 hover:text-red-600 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="space-y-3 text-xs font-bold">
+                <div>
+                    <label class="block mb-1 text-slate-700">عنوان الخبر *</label>
+                    <input id="admTitle" type="text" class="w-full border rounded-xl px-3 py-2.5" placeholder="مثال: تكريم أوائل الطلاب...">
+                </div>
+                <div>
+                    <label class="block mb-1 text-slate-700">تفاصيل الخبر *</label>
+                    <textarea id="admDesc" rows="4" class="w-full border rounded-xl px-3 py-2.5" placeholder="اكتب تفاصيل الخبر هنا..."></textarea>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block mb-1 text-slate-700">التاريخ</label>
+                        <input id="admDate" type="text" class="w-full border rounded-xl px-3 py-2.5" placeholder="مثال: 28 نوفمبر 2026">
+                    </div>
+                    <div>
+                        <label class="block mb-1 text-slate-700">التصنيف</label>
+                        <input id="admCategory" type="text" class="w-full border rounded-xl px-3 py-2.5" placeholder="مثال: أنشطة طلابية">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block mb-1 text-slate-700">المكان</label>
+                        <input id="admPlace" type="text" class="w-full border rounded-xl px-3 py-2.5" placeholder="مثال: فناء المدرسة">
+                    </div>
+                    <div>
+                        <label class="block mb-1 text-slate-700">الشارة (Badge)</label>
+                        <input id="admBadge" type="text" class="w-full border rounded-xl px-3 py-2.5" value="تغطية خاصة">
+                    </div>
+                </div>
+                <div>
+                    <label class="block mb-1 text-slate-700">مقولة أو جملة مميزة (اختياري)</label>
+                    <input id="admQuote" type="text" class="w-full border rounded-xl px-3 py-2.5" placeholder="اختياري...">
+                </div>
+                <div>
+                    <label class="block mb-1 text-slate-700">رفع صور للخبر (يمكن اختيار أكثر من صورة)</label>
+                    <input id="admImages" type="file" accept="image/*" multiple class="w-full border rounded-xl px-3 py-2 bg-slate-50">
+                </div>
+                <div>
+                    <label class="block mb-1 text-slate-700">رفع فيديو للخبر (اختياري)</label>
+                    <input id="admVideo" type="file" accept="video/*" class="w-full border rounded-xl px-3 py-2 bg-slate-50">
+                </div>
+                <label class="flex items-center gap-2 pt-1 cursor-pointer">
+                    <input id="admMemorial" type="checkbox" class="w-4 h-4">
+                    <span>تفعيل نمط التعزية (هادئ / داكن)</span>
+                </label>
+            </div>
+
+            <div id="admStatus" class="text-xs font-bold text-royal-blue"></div>
+
+            <div class="flex items-center justify-end gap-3 pt-2">
+                <button onclick="closeAdminModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-black">إلغاء</button>
+                <button id="admSubmitBtn" onclick="publishNewsToSupabase()" class="px-6 py-2.5 rounded-xl royal-gradient-bg text-white text-xs font-black border border-royal-gold shadow-md">
+                    <i class="fa-solid fa-paper-plane ml-1"></i> نشر الخبر الآن
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🤖 المعلم الذكي الأكاديمي -->
     <div class="fixed bottom-6 left-6 z-50">
         <button onclick="toggleAIChat()" class="royal-gradient-bg text-white p-4 rounded-full shadow-2xl flex items-center justify-center border-2 border-royal-gold transition duration-300 transform hover:scale-110">
             <i class="fa-solid fa-graduation-cap text-2xl text-royal-gold"></i>
@@ -573,9 +633,7 @@
                 </div>
             </div>
 
-            <div id="aiChatBody" class="p-4 h-80 overflow-y-auto space-y-3 bg-slate-50 text-xs">
-                <!-- توثيق اسم الطالب وتسجيل الجلسة -->
-            </div>
+            <div id="aiChatBody" class="p-4 h-80 overflow-y-auto space-y-3 bg-slate-50 text-xs"></div>
 
             <div class="p-3 border-t border-slate-200 bg-white flex items-center gap-2">
                 <input type="text" id="aiUserInput" onkeypress="handleAIKeyPress(event)" placeholder="اسأل عن المنهج أو اطلب تلخيصاً..." class="w-full bg-slate-100 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-royal-blue font-bold">
@@ -584,9 +642,7 @@
         </div>
     </div>
 
-    <!-- Scripts -->
     <script>
-        // نسخة ملف واحد: ضع مفتاح Groq هنا للتجربة فقط. المفتاح سيكون ظاهرًا للزوار!
         const GROQ_API_KEY = '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';
         const GROQ_MODEL = 'openai/gpt-oss-120b';
         const aiConversation = [];
@@ -636,7 +692,6 @@
             if (event.key === 'Enter') sendAIMessage();
         }
 
-        // إعادة المحاولة تلقائيًا عند ضغط السيرفر (429) مع انتظار متدرج
         async function fetchWithRetry(url, options, maxRetries = 3) {
             for (let attempt = 1; attempt <= maxRetries; attempt++) {
                 const response = await fetch(url, options);
@@ -673,7 +728,6 @@
             chatBody.scrollTop = chatBody.scrollHeight;
 
             try {
-                
                 const messages = [{ role: 'system', content: 'أنت المعلم الذكي المساعد لطلاب مدرسة عمرو موسى الثانوية بنين بالقناطر الخيرية. تحدث بالعربية المصرية البسيطة أو العربية الفصحى حسب سؤال الطالب. اشرح بطريقة تعليمية واضحة وعلى مراحل. في المسائل وضّح الفكرة والخطوات ثم النتيجة. في التلخيص نظّم النقاط والعناوين. لا تخترع معلومات رسمية عن المدرسة أو مواعيد أو نتائج؛ إذا لم تعرف فقل ذلك بوضوح. لا تدّعِ أنك مدرس بشري أو أن إجاباتك معتمدة رسميًا. شجّع الطالب على الفهم وليس نسخ الإجابة فقط.' }];
                 for (const item of aiConversation.slice(-12)) {
                     if (!item || !['user', 'model'].includes(item.role) || typeof item.text !== 'string') continue;
@@ -697,7 +751,6 @@
                 if (!response.ok) throw new Error(data?.error?.message || 'تعذر الاتصال بالمعلم الذكي. جرب بعد دقيقة لو السيرفر مضغوط.');
                 const reply = (data?.choices?.[0]?.message?.content || '').trim();
                 if (!reply) throw new Error('وصل رد فارغ، جرّب مرة أخرى.');
-                if (!reply) throw new Error('وصل رد فارغ، جرّب مرة أخرى.');
 
                 aiConversation.push({ role: 'user', text: message }, { role: 'model', text: reply });
                 const aiMsg = document.createElement('div');
@@ -719,7 +772,7 @@
 
         async function fetchWeather() {
             try {
-                const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=30.1328&longitude=31.1306&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m');
+                const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=30.1328&longitude=31.1306¤t=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m');
                 const data = await response.json();
                 if(data && data.current) {
                     document.getElementById('tempDisplay').innerText = Math.round(data.current.temperature_2m) + '°C';
@@ -762,6 +815,11 @@
 
             const targetBtn = document.getElementById('btn-' + tabId);
             if (targetBtn) targetBtn.classList.add('active-tab');
+
+            setTimeout(() => {
+                const el = document.getElementById(tabId);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 60);
         }
 
         const canvas = document.getElementById('particles');
@@ -802,9 +860,6 @@
             document.getElementById("progressBar").style.width = scrolled + "%";
         });
 
-        /* ============ تحسينات التفاعل ============ */
-
-        // ظهور تدريجي للعناصر عند التمرير
         const revealTargets = document.querySelectorAll('.royal-card-glow, .tab-content h2, .chip, #weatherWidget');
         revealTargets.forEach(el => el.classList.add('reveal'));
         const revealObserver = new IntersectionObserver((entries) => {
@@ -817,31 +872,161 @@
         }, { threshold: 0.12 });
         revealTargets.forEach(el => revealObserver.observe(el));
 
-        // تمرير سلس لأعلى القسم عند التبديل بين التبويبات
-        const _origSwitchTab = switchTab;
-        switchTab = function(tabId) {
-            _origSwitchTab(tabId);
-            setTimeout(() => {
-                const el = document.getElementById(tabId);
-                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 60);
-        };
-
-
         /* =====================================================================
-           نظام الأخبار الديناميكي — لوحة التحكم: Google Sheets
-           الشخص المسؤول يضيف خبرًا جديدًا في الشيت فقط، والموقع بيتحدث تلقائيًا
+           إعدادات Supabase لقاعدة البيانات ورفع الملفات
            ===================================================================== */
-        const NEWS_SHEET_ID = 'PUT_SHEET_ID_HERE'; // معرف شيت الأخبار (يتم وضعه مرة واحدة)
-        const NEWS_JSON_URL = 'https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/main/news.json'; // ملف الأخبار في الريبو — عدّل المسار لو حطيته في فولدر
-        const SHEET_TAB = 'news'; // اسم التبويب داخل الشيت
+        const SUPABASE_URL = 'https://louncgobixpbbneknure.supabase.co';
+        const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_oUtrFudY5KhRuKo-3KqZWw_G8WZfBSZ';
+        const STORAGE_BUCKET = 'school-files';
+        const ADMIN_PASSCODE = '2026';
+        const NEWS_JSON_URL = 'https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/main/news.json';
         const COUNTER_NS_NEWS = 'amr-mousa-school';
 
-        // أخبار احتياطية تعرض لو الشيت مش متوفر
-        const fallbackNews = [{"title": "«الأستاذة غادة السيد» تقود طلاب عمرو موسى نحو الإنتاج", "desc": "نظّمت مدرسة عمرو موسى الثانوية بنين بالقناطر الخيرية أنشطة طلابية داخل غرفة التربية الزراعية، تحت إشراف معلمة التربية الزراعية الأستاذة غادة السيد، تضمنت تصنيع منتجات زراعية وتدريب الطلاب على أساليب التعامل السليم معها، برعاية مدير المدرسة الأستاذ أحمد إبراهيم عبد الحميد. وتأتي الأنشطة ضمن تعزيز المهارات العملية والوعي الزراعي لدى الطلاب.", "quote": "من غرفة التربية الزراعية إلى صناعة المستقبل.. طلاب «عمرو موسى» يثبتون أن التعليم العملي هو الطريق الأقصر لبناء جيل قادر على الإنتاج والإبداع.", "date": "4 نوفمبر 2026", "category": "التربية الزراعية", "place": "غرفة التربية الزراعية", "badge": "تغطية خاصة", "images": ["https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/f49dcf7d3d514cdacfcd18871e9c28e3810f8800/WhatsApp%20Image%202026-11-04%20at%203.35.35%20PM.jpeg", "https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/refs/heads/main/WhatsApp%20Image%202026-11-04%20at%203.35.39%20PM.jpeg"], "video": "https://www.image2url.com/r2/default/videos/1793818347816-3c510a74-3224-4125-b156-d8ec0734c7b3.mp4"}, {"title": "بالصور | صنّاع المستقبل يشتعلون بالطاقة… طلاب مدرسة عمرو موسى يحولون الفناء إلى ساحة انضباط وحماس رياضي", "desc": "في مشهد يعكس حيوية الجيل الجديد والتزامًا مدرسيًا لافتًا، استعر طلاب مدرسة عمرو موسى الثانوية بنين بالقناطر روحهم الرياضية داخل فناء المدرسة، وهم يرتدون الزي الرياضي الموحد ويؤدون تمارينهم اليومية بانضباط وتناغم مثير للإعجاب. وبدأت الفقرة باصطفاف منظم للطلاب، قبل أن ينطلقوا في أداء تمارين الإحماء والضغط وتمارين البطن الجماعية، وسط تفاعل إيجابي وحماس واضح بين الصفوف، في لقطات توثق قوة الروح الجماعية وأهمية النشاط البدني في بيئة المدرسة. وكانت المبادرة تأتي تحت إشراف مباشر من الأستاذ أحمد إبراهيم عبد الحميد، مدير مدرسة عمرو موسى الثانوية بنين بالقناطر، الذي حرص على متابعة سير النشاط وتشجيع الطلاب على الالتزام والمشاركة الفاعلة، مؤكدًا أهمية الرياضة في بناء شخصية الطالب وتعزيز انضباطه وصحته. كما تولى الأستاذ أحمد سعيد، معلم التربية الرياضية، قيادة التمارين وتوجيه الطلاب أثناء الأداء، بما يعكس جهودًا تربوية ورياضية متكاملة داخل المدرسة، ورسالة عملية عن قيم اللياقة والعمل الجماعي والانتماء للمؤسسة التعليمية. وفي ختام المشهد، بدا الطلاب أكثر نشاطًا وتركيزًا، حاملين معهم رسالة واضحة: الرياضة ليست ترفًا… بل طريق إلى جيل أقوى ومستقبل أكثر إشراقًا، تحت رعاية إدارة المدرسة وجهود معلميها.", "quote": "", "date": "5 نوفمبر 2026", "category": "النشاط الرياضي", "place": "فناء المدرسة", "badge": "تغطية حية", "images": ["https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/refs/heads/main/%D8%B7%D9%84%D8%A7%D8%A8%20%D8%A8%D8%B2%D9%8A%20%D8%A3%D8%AD%D9%85%D8%B1%20%D9%81%D9%8A%20%D8%B3%D8%A7%D8%AD%D8%A9%20%D8%A7%D9%84%D9%85%D8%AF%D8%B1%D8%B3%D8%A9.png", "https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/refs/heads/main/WhatsApp%20Image%202026-11-05%20at%209.53.15%20PM.jpeg"], "video": "https://www.image2url.com/r2/default/videos/1793910794268-1a6d41c6-a90f-41b2-9f21-319ea07acd7f.mp4"}, {"title": "في حفل تكريم العطاء.. الراحل الإعلامي القدير الأستاذ محمود وهيب.. صوت الرأي العام الذي جمع الإعلام بالتعليم وخدمة الناس", "desc": "الراحل ...كان الإعلامي الكبير الأستاذ محمود وهيب من رواد الإعلام الذين جمعوا بين الكلمة المسؤولة والموقف الأمين والالتزام المهني. قدّم عبر أعماله الإعلامية نموذجًا مشرّفًا في نقل الخبر وتحليل القضية وخدمة الرأي العام، وكان صوته حاضرًا في قضايا الوطن والمواطن، وكلمته تحمل ثقة الجمهور واحترام زملائه. وامتدت مسيرته إلى الميدان التربوي، حيث كان له دورٌ فاعل في دعم المدارس والأنشطة الطلابية والثقافية. آمن بأن الإعلام والتعليم جناحان لنهضة المجتمع، فساهم في توعية الأجيال، وشارك في فعاليات المدارس، وشجّع الطلبة على القراءة والمعرفة والانتماء إلى وطنهم، وربط المؤسسة التعليمية بقضايا المجتمع واحتياجاته. كما كان للأستاذ محمود وهيب حضورٌ بارز في خدمة المجتمع المحلي؛ فقد كان قريبًا من الناس، ومستمعًا لمشكلاتهم، ومدافعًا عن حقوقهم وقضاياهم. ساهم في إبراز إنجازات مناطقه، وتسليط الضوء على احتياجات أبنائه، ودعم المبادرات المجتمعية والخيرية، مما جعله إعلاميًا شعبيًا بمعنى الكلمة، يجمع بين رسالة المهنة وخدمة الإنسان. إن رحيله خسارة كبيرة للإعلام، وللمجال التربوي، وللمجتمع الذي خدمه بصدق وإخلاص. لكن أعماله وإنجازاته وذاكرته الطيبة ستظل شاهدًا على عطائه، ومصدر فخرٍ لكل من عرف قيمته الإنسانية والمهنية. نسأل الله العلي القدير أن يتغمّد الفقيد بواسع رحمته، وأن يُسكنه فسيح جناته، وأن يلهم أهله وذويه وزملاءه ومحبيه الصبر والسلوان.", "quote": "«إنا لله وإنا إليه راجعون»", "date": "5 نوفمبر 2026", "category": "وفيات وتعازي", "place": "حفل تكريم العطاء", "badge": "تعازينا ومواساتنا", "memorial": true, "images": ["https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/refs/heads/main/WhatsApp%20Image%202026-11-05%20at%2010.08.55%20PM.jpeg", "https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/refs/heads/main/WhatsApp%20Image%202026-11-05%20at%2010.08.55%20PM%20%281%29.jpeg", "https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/refs/heads/main/WhatsApp%20Image%202026-11-05%20at%2010.08.57%20PM.jpeg"], "video": ""}];
+        const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+        const fallbackNews = [
+            {
+                "title": "«الأستاذة غادة السيد» تقود طلاب عمرو موسى نحو الإنتاج",
+                "desc": "نظّمت مدرسة عمرو موسى الثانوية بنين بالقناطر الخيرية أنشطة طلابية داخل غرفة التربية الزراعية، تحت إشراف معلمة التربية الزراعية الأستاذة غادة السيد، تضمنت تصنيع منتجات زراعية وتدريب الطلاب على أساليب التعامل السليم معها، برعاية مدير المدرسة الأستاذ أحمد إبراهيم عبد الحميد. وتأتي الأنشطة ضمن تعزيز المهارات العملية والوعي الزراعي لدى الطلاب.",
+                "quote": "من غرفة التربية الزراعية إلى صناعة المستقبل.. طلاب «عمرو موسى» يثبتون أن التعليم العملي هو الطريق الأقصر لبناء جيل قادر على الإنتاج والإبداع.",
+                "date": "4 نوفمبر 2026",
+                "category": "التربية الزراعية",
+                "place": "غرفة التربية الزراعية",
+                "badge": "تغطية خاصة",
+                "images": [
+                    "https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/f49dcf7d3d514cdacfcd18871e9c28e3810f8800/WhatsApp%20Image%202026-11-04%20at%203.35.35%20PM.jpeg",
+                    "https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/refs/heads/main/WhatsApp%20Image%202026-11-04%20at%203.35.39%20PM.jpeg"
+                ],
+                "video": "https://www.image2url.com/r2/default/videos/1793818347816-3c510a74-3224-4125-b156-d8ec0734c7b3.mp4"
+            },
+            {
+                "title": "بالصور | صنّاع المستقبل يشتعلون بالطاقة… طلاب مدرسة عمرو موسى يحولون الفناء إلى ساحة انضباط وحماس رياضي",
+                "desc": "في مشهد يعكس حيوية الجيل الجديد والتزامًا مدرسيًا لافتًا، استعر طلاب مدرسة عمرو موسى الثانوية بنين بالقناطر روحهم الرياضية داخل فناء المدرسة، وهم يرتدون الزي الرياضي الموحد ويؤدون تمارينهم اليومية بانضباط وتناغم مثير للإعجاب.",
+                "quote": "",
+                "date": "5 نوفمبر 2026",
+                "category": "النشاط الرياضي",
+                "place": "فناء المدرسة",
+                "badge": "تغطية حية",
+                "images": [
+                    "https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/refs/heads/main/%D8%B7%D9%84%D8%A7%D8%A8%20%D8%A8%D8%B2%D9%8A%20%D8%A3%D8%AD%D9%85%D8%B1%20%D9%81%D9%8A%20%D8%B3%D8%A7%D8%AD%D8%A9%20%D8%A7%D9%84%D9%85%D8%AF%D8%B1%D8%B3%D8%A9.png",
+                    "https://raw.githubusercontent.com/mohmedahmedrandix-create/Diud/refs/heads/main/WhatsApp%20Image%202026-11-05%20at%209.53.15%20PM.jpeg"
+                ],
+                "video": "https://www.image2url.com/r2/default/videos/1793910794268-1a6d41c6-a90f-41b2-9f21-319ea07acd7f.mp4"
+            }
+        ];
+
+        function openAdminModal() {
+            const pass = prompt('أدخل رمز النشر الخاص بالمسؤول:');
+            if (pass !== ADMIN_PASSCODE) {
+                if (pass !== null) alert('الرمز غير صحيح!');
+                return;
+            }
+            const dateInput = document.getElementById('admDate');
+            if (dateInput && !dateInput.value) {
+                dateInput.value = new Date().toLocaleDateString('ar-EG', { day: 'numeric', month: 'long', year: 'numeric' });
+            }
+            document.getElementById('adminNewsModal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminNewsModal').classList.add('hidden');
+            document.getElementById('admStatus').textContent = '';
+        }
+
+        async function uploadSingleFileToStorage(file) {
+            const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+            const filePath = `${Date.now()}_${Math.random().toString(36).slice(2, 7)}_${cleanName}`;
+            const { error } = await sb.storage.from(STORAGE_BUCKET).upload(filePath, file, { upsert: false });
+            if (error) throw new Error('فشل رفع الملف (' + file.name + '): ' + error.message);
+            const { data } = sb.storage.from(STORAGE_BUCKET).getPublicUrl(filePath);
+            return data.publicUrl;
+        }
+
+        async function publishNewsToSupabase() {
+            const title = document.getElementById('admTitle').value.trim();
+            const desc = document.getElementById('admDesc').value.trim();
+            const date = document.getElementById('admDate').value.trim();
+            const category = document.getElementById('admCategory').value.trim();
+            const place = document.getElementById('admPlace').value.trim();
+            const badge = document.getElementById('admBadge').value.trim() || 'تغطية';
+            const quote = document.getElementById('admQuote').value.trim();
+            const memorial = document.getElementById('admMemorial').checked;
+            const imgFiles = Array.from(document.getElementById('admImages').files || []);
+            const vidFile = (document.getElementById('admVideo').files || [])[0] || null;
+
+            const statusEl = document.getElementById('admStatus');
+            const submitBtn = document.getElementById('admSubmitBtn');
+
+            if (!title || !desc) {
+                alert('من فضلك اكتب عنوان الخبر وتفاصيله.');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            statusEl.textContent = 'جاري رفع الملفات ونشر الخبر... ⏳';
+
+            try {
+                const uploadedImages = [];
+                for (const f of imgFiles) {
+                    statusEl.textContent = `جاري رفع الصورة: ${f.name}...`;
+                    const url = await uploadSingleFileToStorage(f);
+                    uploadedImages.push(url);
+                }
+
+                let videoUrl = '';
+                if (vidFile) {
+                    statusEl.textContent = `جاري رفع الفيديو: ${vidFile.name}...`;
+                    videoUrl = await uploadSingleFileToStorage(vidFile);
+                }
+
+                statusEl.textContent = 'جاري حفظ الخبر في قاعدة البيانات...';
+                const { error } = await sb.from('news').insert([{
+                    title,
+                    desc,
+                    quote,
+                    date,
+                    category,
+                    place,
+                    badge,
+                    images: JSON.stringify(uploadedImages),
+                    video: videoUrl,
+                    memorial
+                }]);
+
+                if (error) throw new Error('فشل حفظ الخبر: ' + error.message);
+
+                statusEl.textContent = 'تم نشر الخبر بنجاح! ✅';
+                document.getElementById('admTitle').value = '';
+                document.getElementById('admDesc').value = '';
+                document.getElementById('admQuote').value = '';
+                document.getElementById('admImages').value = '';
+                document.getElementById('admVideo').value = '';
+                document.getElementById('admMemorial').checked = false;
+
+                await loadNews();
+                setTimeout(closeAdminModal, 700);
+            } catch (err) {
+                statusEl.textContent = '❌ ' + err.message;
+            } finally {
+                submitBtn.disabled = false;
+            }
+        }
+
+        function parseImagesField(val) {
+            if (!val) return [];
+            if (Array.isArray(val)) return val.filter(Boolean);
+            const trimmed = String(val).trim();
+            if (trimmed.startsWith('[')) {
+                try {
+                    const arr = JSON.parse(trimmed);
+                    if (Array.isArray(arr)) return arr.filter(Boolean);
+                } catch {}
+            }
+            return trimmed.split(',').map(s => s.trim()).filter(Boolean);
+        }
 
         function escapeHtml(s) {
-            return String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+            return String(s || '').replace(/[&<>"]/g, c => ({ '&': '&', '<': '<', '>': '>', '"': '"' }[c]));
         }
 
         function counterKeyFor(idx) {
@@ -862,20 +1047,20 @@
                 `<button onclick="newsGoTo(${idx}, ${i})" aria-label="صورة ${i + 1}" class="w-2.5 h-2.5 rounded-full ${i === 0 ? 'bg-royal-gold transition shadow' : 'bg-white/60 hover:bg-white transition'}"></button>`
             ).join('');
             const sliderBlock = imgs.length ? `
-                        <div class="relative rounded-2xl overflow-hidden border-2 border-royal-blue/20 shadow-xl mt-8">
-                            <div id="sliderTrack_${idx}" data-count="${imgs.length}" class="flex transition-transform duration-500 ease-in-out">${slides}</div>
-                            <button onclick="newsGo(${idx}, -1)" aria-label="السابق" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 text-royal-blue shadow-lg flex items-center justify-center hover:bg-royal-blue hover:text-white transition"><i class="fa-solid fa-chevron-left"></i></button>
-                            <button onclick="newsGo(${idx}, 1)" aria-label="التالي" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 text-royal-blue shadow-lg flex items-center justify-center hover:bg-royal-blue hover:text-white transition"><i class="fa-solid fa-chevron-right"></i></button>
-                            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">${dots}</div>
-                        </div>` : '';
+                <div class="relative rounded-2xl overflow-hidden border-2 border-royal-blue/20 shadow-xl mt-8">
+                    <div id="sliderTrack_${idx}" data-count="${imgs.length}" class="flex transition-transform duration-500 ease-in-out">${slides}</div>
+                    <button onclick="newsGo(${idx}, -1)" aria-label="السابق" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 text-royal-blue shadow-lg flex items-center justify-center hover:bg-royal-blue hover:text-white transition"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button onclick="newsGo(${idx}, 1)" aria-label="التالي" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 text-royal-blue shadow-lg flex items-center justify-center hover:bg-royal-blue hover:text-white transition"><i class="fa-solid fa-chevron-right"></i></button>
+                    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">${dots}</div>
+                </div>` : '';
             const videoBlock = n.video ? `
-                        <div class="mt-8">
-                            <h4 class="font-black text-royal-blue text-sm mb-3 flex items-center gap-2"><i class="fa-solid fa-circle-play text-royal-darkgold"></i> شاهد التغطية المصورة</h4>
-                            <video controls preload="metadata" ${imgs[1] ? `poster="${escapeHtml(imgs[1])}"` : ''} class="w-full rounded-2xl border-2 border-royal-blue/20 shadow-xl bg-black">
-                                <source src="${escapeHtml(n.video)}" type="video/mp4">
-                                متصفحك لا يدعم تشغيل الفيديو.
-                            </video>
-                        </div>` : '';
+                <div class="mt-8">
+                    <h4 class="font-black text-royal-blue text-sm mb-3 flex items-center gap-2"><i class="fa-solid fa-circle-play text-royal-darkgold"></i> شاهد التغطية المصورة</h4>
+                    <video controls preload="metadata" ${imgs[1] ? `poster="${escapeHtml(imgs[1])}"` : ''} class="w-full rounded-2xl border-2 border-royal-blue/20 shadow-xl bg-black">
+                        <source src="${escapeHtml(n.video)}" type="video/mp4">
+                        متصفحك لا يدعم تشغيل الفيديو.
+                    </video>
+                </div>` : '';
             const quoteBlock = n.quote ? `<p class="royal-gradient-text leading-loose text-sm md:text-base font-black">${escapeHtml(n.quote)}</p>` : '';
 
             const isMemorial = !!n.memorial;
@@ -925,29 +1110,26 @@
             if (!article) return;
             const title = article.querySelector('h3')?.textContent?.trim() || 'خبر من مدرسة عمرو موسى الثانوية بنين';
             const description = article.querySelector('.p-6.md\\:p-10 > p')?.textContent?.trim() || '';
-            const shareData = { title, text: `${title}\\n${description}`, url: window.location.href };
+            const shareData = { title, text: `${title}\n${description}`, url: window.location.href };
             try {
                 if (navigator.share) {
                     await navigator.share(shareData);
                 } else if (navigator.clipboard?.writeText) {
-                    await navigator.clipboard.writeText(`${shareData.text}\\n${shareData.url}`);
+                    await navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
                     alert('تم نسخ الخبر والرابط. يمكنك إرساله لأي شخص.');
                 } else {
-                    prompt('انسخ الخبر لمشاركته:', `${shareData.text}\\n${shareData.url}`);
+                    prompt('انسخ الخبر لمشاركته:', `${shareData.text}\n${shareData.url}`);
                 }
             } catch (error) {
                 if (error.name !== 'AbortError') alert('تعذرت المشاركة. حاول مرة أخرى.');
             }
         }
 
-        /* ---------- السلايدر (يعمل مع أي عدد صور وأي عدد أخبار) ---------- */
         const sliderPos = {};
         function applySlider(idx) {
             const track = document.getElementById('sliderTrack_' + idx);
             if (!track) return;
-            const count = parseInt(track.dataset.count || track.children.length);
             track.style.transform = `translateX(${(sliderPos[idx] || 0) * 100}%)`;
-            track.parentElement.querySelectorAll(':scope > div:last-child button, :scope > .absolute.bottom-3 button').forEach(() => {});
             const dotsWrap = track.parentElement.querySelector('.bottom-3');
             if (dotsWrap) {
                 Array.from(dotsWrap.children).forEach((d, i) => {
@@ -956,7 +1138,6 @@
                         : 'w-2.5 h-2.5 rounded-full bg-white/60 hover:bg-white transition';
                 });
             }
-            void count;
         }
         function newsGo(idx, dir) {
             const track = document.getElementById('sliderTrack_' + idx);
@@ -979,7 +1160,6 @@
             });
         }, 6000);
 
-        /* ---------- الإعجاب المشترك لكل خبر ---------- */
         function paintLikeBtn(idx, liked) {
             const btn = document.getElementById('likeBtn_' + idx);
             if (!btn) return;
@@ -1021,8 +1201,6 @@
             }
         }
 
-
-        /* إخفاء أي صورة بايظة تلقائيًا: شريحة من السلايدر تتحذف، وصورة الغلاف تخفي الهيدر */
         function newsImgError(img) {
             const slide = img.closest('[data-slide]');
             const track = img.closest('[id^="sliderTrack_"]');
@@ -1046,43 +1224,39 @@
             if (heroBox) heroBox.style.display = 'none';
         }
 
-        /* ---------- تحميل الأخبار من الشيت (أو الاحتياطية) ---------- */
         async function loadNews() {
             const grid = document.getElementById('newsGrid');
             let items = null;
 
-            if (NEWS_SHEET_ID && NEWS_SHEET_ID !== 'PUT_SHEET_ID_HERE') {
-                try {
-                    const r = await fetch(`https://opensheet.elk.sh/${NEWS_SHEET_ID}/${SHEET_TAB}`);
-                    if (r.ok) {
-                        const rows = await r.json();
-                        if (Array.isArray(rows) && rows.length) {
-                            const parsed = rows.map(row => ({
-                                title: row.title || '',
-                                desc: row.desc || '',
-                                quote: row.quote || '',
-                                date: row.date || '',
-                                category: row.category || '',
-                                place: row.place || '',
-                                badge: row.badge || 'تغطية',
-                                images: (row.images || '').split(',').map(s => s.trim()).filter(Boolean),
-                                video: (row.video || '').trim(),
-                                memorial: /^(true|1|نعم|yes)$/i.test((row.memorial || '').trim()),
-                            })).filter(n => n.title);
-                            if (parsed.length) items = parsed;
-                        }
-                    }
-                } catch (e) { /* الشيت مش متوفر — هنعرض الأخبار الاحتياطية */ }
-            }
+            try {
+                const { data, error } = await sb
+                    .from('news')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (!error && Array.isArray(data) && data.length) {
+                    items = data.map(row => ({
+                        title: row.title || '',
+                        desc: row.desc || row.details || '',
+                        quote: row.quote || '',
+                        date: row.date || '',
+                        category: row.category || '',
+                        place: row.place || '',
+                        badge: row.badge || 'تغطية',
+                        images: parseImagesField(row.images || row.file_url),
+                        video: (row.video || '').trim(),
+                        memorial: row.memorial === true || /^(true|1|نعم|yes)$/i.test(String(row.memorial || '').trim()),
+                    })).filter(n => n.title);
+                }
+            } catch (e) {}
 
             if (!items) {
-                // المحاولة التانية: ملف news.json على GitHub (من غير تعديل الكود)
                 try {
                     const rj = await fetch(NEWS_JSON_URL + '?v=' + Date.now());
                     if (rj.ok) {
                         const arr = await rj.json();
                         if (Array.isArray(arr) && arr.length) {
-                            const parsed = arr.map(row => ({
+                            items = arr.map(row => ({
                                 title: row.title || '',
                                 desc: row.desc || '',
                                 quote: row.quote || '',
@@ -1090,14 +1264,13 @@
                                 category: row.category || '',
                                 place: row.place || '',
                                 badge: row.badge || 'تغطية',
-                                images: Array.isArray(row.images) ? row.images.filter(Boolean) : (row.images || '').split(',').map(s => s.trim()).filter(Boolean),
+                                images: parseImagesField(row.images),
                                 video: (row.video || '').trim(),
                                 memorial: row.memorial === true || /^(true|1|نعم|yes)$/i.test(String(row.memorial || '').trim()),
                             })).filter(n => n.title);
-                            if (parsed.length) items = parsed;
                         }
                     }
-                } catch (e) { /* ملف JSON مش متوفر — هنعرض الأخبار الاحتياطية */ }
+                } catch (e) {}
             }
 
             if (!items) items = fallbackNews;
@@ -1107,13 +1280,12 @@
                 if (!m) return 0;
                 return Number(m[3]) * 10000 + (monthOrder[m[2]] || 0) * 100 + Number(m[1]);
             };
-            items = [...items].reverse().sort((a, b) => dateValue(b.date) - dateValue(a.date)); // الأحدث أولاً؛ عند تساوي التاريخ يتقدم الخبر المضاف لاحقًا
+            items = [...items].reverse().sort((a, b) => dateValue(b.date) - dateValue(a.date));
             grid.innerHTML = items.map((n, i) => buildNewsArticle(n, i)).join('');
             items.forEach((_, i) => loadLikesFor(i));
         }
 
         loadNews();
     </script>
-    <script src="news.js"></script>
 </body>
 </html>
